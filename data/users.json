@@ -6,5 +6,20 @@
         "level": 1,
         "xp": 50,
         "coins": 120
+    },
+    {
+        "id": "1783073980834624",
+        "username": "Binuri",
+        "house": "slytherin",
+        "level": 2,
+        "xp": 4,
+        "coins": 40,
+        "inventory": [
+            "pet_toad"
+        ],
+        "equipped": {
+            "wand": null,
+            "pet": null
+        }
     }
 ]

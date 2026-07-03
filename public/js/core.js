@@ -22,7 +22,7 @@ async function loadViews() {
         'potion-mixing', 'memory-cards', 
         'house-quiz', 'flying-challenge',
         'leaderboard', 'about', 'settings',
-        'sorting-ceremony', 'profile'
+        'sorting-ceremony', 'profile', 'diagon-alley'
     ];
     
     for (const view of views) {
@@ -166,6 +166,11 @@ function initStars(count) {
 }
 
 function navigateTo(viewId) {
+    const currentView = document.querySelector('.view.active');
+    if (currentView && currentView.id !== viewId) {
+        window.previousViewId = currentView.id;
+    }
+    
     document.querySelectorAll('.view').forEach(view => {
         view.classList.remove('active');
         view.classList.add('hidden');
@@ -174,6 +179,9 @@ function navigateTo(viewId) {
     if (targetView) {
         targetView.classList.remove('hidden');
         targetView.classList.add('active');
+        
+        // Dispatch custom event for RPG Engine to listen to
+        document.dispatchEvent(new CustomEvent('viewChanged', { detail: { viewId } }));
     }
 }
 

@@ -1,0 +1,54 @@
+[
+  {
+    "id": "wand_elder",
+    "name": "The Elder Wand",
+    "type": "wand",
+    "description": "An immensely powerful wand. Changes your cursor magic.",
+    "price": 1000,
+    "icon": "🪄"
+  },
+  {
+    "id": "wand_phoenix",
+    "name": "Phoenix Core Wand",
+    "type": "wand",
+    "description": "A wand of fiery power and loyalty. Changes your cursor magic.",
+    "price": 500,
+    "icon": "🎇"
+  },
+  {
+    "id": "pet_snowy_owl",
+    "name": "Snowy Owl",
+    "type": "pet",
+    "description": "A loyal companion. Grants +10% XP in all games.",
+    "price": 250,
+    "xpBoost": 0.10,
+    "icon": "🦉"
+  },
+  {
+    "id": "pet_black_cat",
+    "name": "Midnight Cat",
+    "type": "pet",
+    "description": "A stealthy feline friend. Grants +15% XP in all games.",
+    "price": 400,
+    "xpBoost": 0.15,
+    "icon": "🐈‍⬛"
+  },
+  {
+    "id": "pet_toad",
+    "name": "Trevor the Toad",
+    "type": "pet",
+    "description": "He gets lost often, but grants +5% XP in all games.",
+    "price": 100,
+    "xpBoost": 0.05,
+    "icon": "🐸"
+  },
+  {
+    "id": "potion_xp",
+    "name": "Elixir of Insight",
+    "type": "potion",
+    "description": "A sparkling blue potion. Consume for an instant 100 XP boost.",
+    "price": 150,
+    "instantXp": 100,
+    "icon": "🧪"
+  }
+]

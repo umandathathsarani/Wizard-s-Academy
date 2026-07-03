@@ -1,8 +1,10 @@
 // rpg-engine.js
 const RPGEngine = {
     currentUser: null,
+    itemsCatalog: [],
     
-    init: function() {
+    init: async function() {
+        await this.loadItems();
         // Check if user session exists in local storage
         const userId = localStorage.getItem('wizard_id');
         if (userId) {
@@ -47,10 +49,70 @@ const RPGEngine = {
         }
     },
     
+    loadItems: async function() {
+        try {
+            const response = await fetch('/api/items');
+            this.itemsCatalog = await response.json();
+        } catch (e) {
+            console.error('Failed to load items catalog:', e);
+        }
+    },
+    
+    buyItem: async function(itemId) {
+        if (!this.currentUser) return { success: false, error: 'Not logged in' };
+        try {
+            const response = await fetch(`/api/users/${this.currentUser.id}/buy`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ itemId })
+            });
+            const data = await response.json();
+            if (data.success) {
+                this.currentUser = data.user;
+                this.updateUI();
+                return { success: true };
+            }
+            return { success: false, error: data.error };
+        } catch (e) {
+            return { success: false, error: 'Network error' };
+        }
+    },
+    
+    equipItem: async function(itemId) {
+        if (!this.currentUser) return { success: false, error: 'Not logged in' };
+        try {
+            const response = await fetch(`/api/users/${this.currentUser.id}/equip`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ itemId })
+            });
+            const data = await response.json();
+            if (data.success) {
+                this.currentUser = data.user;
+                this.updateUI();
+                return { success: true };
+            }
+            return { success: false, error: data.error };
+        } catch (e) {
+            return { success: false, error: 'Network error' };
+        }
+    },
+    
     addXP: async function(amount) {
         if (!this.currentUser) return;
         
-        let newXp = this.currentUser.xp + amount;
+        let multiplier = 1.0;
+        if (this.currentUser.equipped && this.currentUser.equipped.pet) {
+            const petId = this.currentUser.equipped.pet;
+            const petItem = this.itemsCatalog.find(i => i.id === petId);
+            if (petItem && petItem.xpBoost) {
+                multiplier += petItem.xpBoost;
+            }
+        }
+        
+        const finalAmount = Math.floor(amount * multiplier);
+        
+        let newXp = this.currentUser.xp + finalAmount;
         let newLevel = this.currentUser.level;
         
         // Simple level curve: (Level * 100) XP to reach next level
@@ -102,6 +164,17 @@ const RPGEngine = {
             if (profileLink) {
                 profileLink.style.display = 'inline-block';
                 profileLink.innerHTML = `${this.currentUser.username.toUpperCase()} <span class="nav-stats">Lvl ${this.currentUser.level} | 🪙 ${this.currentUser.coins}</span>`;
+            }
+            
+            // Apply equipped wand to cursor
+            const cursor = document.getElementById('magic-cursor');
+            if (cursor && this.currentUser.equipped && this.currentUser.equipped.wand) {
+                const wandItem = this.itemsCatalog.find(i => i.id === this.currentUser.equipped.wand);
+                if (wandItem) {
+                    cursor.textContent = wandItem.icon;
+                }
+            } else if (cursor) {
+                cursor.textContent = '🪄';
             }
         } else {
             if (loginLink) loginLink.style.display = 'inline-block';
@@ -204,7 +277,27 @@ function updateProfileView() {
         slytherin: '🐍',
         hufflepuff: '🦡'
     };
-    document.getElementById('profile-avatar').textContent = avatars[user.house] || '🧙‍♂️';
+    
+    // Check if user has an equipped pet to show instead of default avatar
+    let avatarIcon = avatars[user.house] || '🧙‍♂️';
+    if (user.equipped && user.equipped.pet) {
+        const petItem = RPGEngine.itemsCatalog.find(i => i.id === user.equipped.pet);
+        if (petItem) avatarIcon = petItem.icon;
+    }
+    document.getElementById('profile-avatar').textContent = avatarIcon;
+    
+    // Update equipped wand
+    const wandSlot = document.getElementById('profile-wand');
+    if (wandSlot) {
+        if (user.equipped && user.equipped.wand) {
+            const wandItem = RPGEngine.itemsCatalog.find(i => i.id === user.equipped.wand);
+            if (wandItem) {
+                wandSlot.innerHTML = `${wandItem.icon} ${wandItem.name}`;
+            }
+        } else {
+            wandSlot.innerHTML = `🪄 Basic Wood Wand`;
+        }
+    }
     
     document.getElementById('profile-level').textContent = user.level;
     document.getElementById('profile-coins').textContent = user.coins;
@@ -216,12 +309,87 @@ function updateProfileView() {
     document.getElementById('profile-xp-bar').style.width = `${percent}%`;
 }
 
-// Ensure updateProfileView is called when we navigate to profile
-// We'll hook into core.js navigateTo if possible, or just override it safely
-const rpgOriginalNavigateTo = window.navigateTo;
-window.navigateTo = function(viewId) {
-    if (rpgOriginalNavigateTo) rpgOriginalNavigateTo(viewId);
-    if (viewId === 'view-profile') {
-        setTimeout(updateProfileView, 50); // slight delay to ensure HTML is injected
+// --- Shop View Functions ---
+function updateShopView() {
+    const user = RPGEngine.currentUser;
+    if (!user) {
+        navigateTo('view-sorting-ceremony');
+        return;
     }
-};
+    
+    document.getElementById('shop-user-coins').textContent = `🪙 ${user.coins}`;
+    
+    const container = document.getElementById('shop-items-container');
+    if (!container) return;
+    container.innerHTML = '';
+    
+    RPGEngine.itemsCatalog.forEach(item => {
+        const isOwned = item.type !== 'potion' && user.inventory && user.inventory.includes(item.id);
+        const isEquipped = user.equipped && (user.equipped.wand === item.id || user.equipped.pet === item.id);
+        
+        let buttonHtml = `<button class="magical-btn item-action" onclick="handleBuyItem('${item.id}')">Buy (${item.price} 🪙)</button>`;
+        if (isEquipped) {
+            buttonHtml = `<button class="magical-btn btn-equipped item-action" onclick="handleEquipItem('${item.id}')">Equipped</button>`;
+        } else if (isOwned) {
+            buttonHtml = `<button class="magical-btn btn-equip item-action" onclick="handleEquipItem('${item.id}')">Equip</button>`;
+        }
+        
+        const card = document.createElement('div');
+        card.className = 'shop-item';
+        card.innerHTML = `
+            <div class="item-icon">${item.icon}</div>
+            <div class="item-name">${item.name}</div>
+            <div class="item-type">${item.type}</div>
+            <div class="item-desc">${item.description}</div>
+            ${!isOwned ? `<div class="item-price">${item.price} 🪙</div>` : ''}
+            ${buttonHtml}
+        `;
+        container.appendChild(card);
+    });
+}
+
+async function handleBuyItem(itemId) {
+    const btn = event.target;
+    btn.textContent = 'Processing...';
+    btn.disabled = true;
+    
+    const result = await RPGEngine.buyItem(itemId);
+    if (result.success) {
+        // Potions apply instantly
+        const item = RPGEngine.itemsCatalog.find(i => i.id === itemId);
+        if (item && item.type === 'potion') {
+            RPGEngine.showLevelUp(RPGEngine.currentUser.level); // Just to trigger a visual if we want, or rely on normal updateUI
+        }
+        updateShopView();
+    } else {
+        alert(result.error);
+        btn.textContent = 'Buy';
+        btn.disabled = false;
+    }
+}
+
+async function handleEquipItem(itemId) {
+    const btn = event.target;
+    btn.textContent = 'Equipping...';
+    btn.disabled = true;
+    
+    const result = await RPGEngine.equipItem(itemId);
+    if (result.success) {
+        updateShopView();
+    } else {
+        alert(result.error);
+        btn.textContent = 'Equip';
+        btn.disabled = false;
+    }
+}
+
+// Listen for view changes to update UI components dynamically
+document.addEventListener('viewChanged', (e) => {
+    const viewId = e.detail.viewId;
+    if (viewId === 'view-profile') {
+        setTimeout(updateProfileView, 50); 
+    }
+    if (viewId === 'view-diagon-alley') {
+        setTimeout(updateShopView, 50);
+    }
+});

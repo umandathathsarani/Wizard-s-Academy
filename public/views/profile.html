@@ -25,12 +25,18 @@
     
     <div class="profile-tabs">
         <button class="tab-btn active">Overview</button>
-        <button class="tab-btn" style="opacity:0.5; cursor:not-allowed;" title="Coming in Phase 13">Inventory</button>
+        <button class="tab-btn" onclick="navigateTo('view-diagon-alley')">Inventory (Shop)</button>
         <button class="tab-btn" style="opacity:0.5; cursor:not-allowed;" title="Coming in Phase 14">Quests</button>
     </div>
     
     <div class="profile-content">
         <p class="placeholder-text">Play mini-games to earn XP and Galleons!</p>
+        <div style="margin: 1.5rem 0;">
+            <h3 style="color:var(--accent-color); font-family:var(--font-heading); margin-bottom: 0.5rem;">Equipped Wand</h3>
+            <div id="profile-wand" style="font-size: 1.5rem; background: rgba(0,0,0,0.5); padding: 1rem; border-radius: 10px; border: 1px solid var(--accent-color); display: inline-block;">
+                🪄 Basic Wood Wand
+            </div>
+        </div>
         <button class="magical-btn" onclick="navigateTo('view-games')">PLAY GAMES</button>
     </div>
 </div>
