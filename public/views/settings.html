@@ -1,0 +1,75 @@
+<div class="settings-container gs-reveal">
+    <button class="btn-back magical-btn-small" onclick="navigateTo('view-home')">⟵ BACK</button>
+    <h2 class="settings-title">SETTINGS</h2>
+    
+    <div class="settings-list">
+        <div class="setting-item">
+            <div class="setting-info">
+                <h3>Ambient Audio</h3>
+                <p>Toggle the magical background music and sound effects.</p>
+            </div>
+            <label class="toggle-switch">
+                <input type="checkbox" id="setting-audio-toggle" checked onchange="toggleAudioSetting(this)">
+                <span class="slider"></span>
+            </label>
+        </div>
+        
+        <div class="setting-item">
+            <div class="setting-info">
+                <h3>Particle Effects</h3>
+                <p>Toggle magical cursors and falling stars (turn off for better performance).</p>
+            </div>
+            <label class="toggle-switch">
+                <input type="checkbox" id="setting-particles-toggle" checked onchange="toggleParticlesSetting(this)">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Ensure the settings match the actual state on load
+    setTimeout(() => {
+        const audioToggle = document.getElementById('setting-audio-toggle');
+        const ambientAudio = document.getElementById('audio-ambient');
+        if(audioToggle && ambientAudio) {
+            audioToggle.checked = !ambientAudio.paused;
+        }
+        
+        const particlesToggle = document.getElementById('setting-particles-toggle');
+        const sparkles = document.getElementById('sparkle-container');
+        if(particlesToggle) {
+            particlesToggle.checked = sparkles.style.display !== 'none';
+        }
+    }, 100);
+
+    function toggleAudioSetting(checkbox) {
+        const ambientAudio = document.getElementById('audio-ambient');
+        const statusSpan = document.getElementById('audio-status');
+        const audioIcon = document.querySelector('.audio-icon');
+        
+        if (checkbox.checked) {
+            if (ambientAudio) ambientAudio.play().catch(e => console.log('Play blocked', e));
+            if (statusSpan) statusSpan.textContent = 'ON';
+            if (audioIcon) audioIcon.textContent = '🔊';
+        } else {
+            if (ambientAudio) ambientAudio.pause();
+            if (statusSpan) statusSpan.textContent = 'OFF';
+            if (audioIcon) audioIcon.textContent = '🔇';
+        }
+    }
+    
+    function toggleParticlesSetting(checkbox) {
+        const sparkles = document.getElementById('sparkle-container');
+        const stars = document.getElementById('stars-container');
+        const candles = document.getElementById('candles-container');
+        const magicCursor = document.getElementById('magic-cursor');
+        
+        const display = checkbox.checked ? 'block' : 'none';
+        
+        if(sparkles) sparkles.style.display = display;
+        if(stars) stars.style.display = display;
+        if(candles) candles.style.display = display;
+        if(magicCursor) magicCursor.style.display = display;
+    }
+</script>

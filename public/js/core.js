@@ -21,7 +21,7 @@ async function loadViews() {
         'home', 'games', 'spell-casting', 
         'potion-mixing', 'memory-cards', 
         'house-quiz', 'flying-challenge',
-        'leaderboard'
+        'leaderboard', 'about', 'settings'
     ];
     
     for (const view of views) {
