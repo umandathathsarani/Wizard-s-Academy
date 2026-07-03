@@ -6,7 +6,7 @@
     <title>Wizard's Academy</title>
     <meta name="description" content="A magical web application with mini-games">
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body>
@@ -56,45 +56,101 @@
     <div class="app-container">
         <!-- Home View -->
         <div id="view-home" class="view active">
+            
             <nav class="top-nav gs-reveal">
-                <div class="nav-logo">🪄</div>
+                <div class="nav-logo">
+                    <span class="shield">A</span>
+                    <span class="logo-text">WIZARD'S<br>ACADEMY</span>
+                </div>
                 <div class="nav-links">
-                    <span onclick="navigateTo('view-home')">Home</span>
-                    <span onclick="navigateTo('view-games')">Games</span>
-                    <span onclick="navigateTo('view-leaderboard')">Leaderboard</span>
-                    <span onclick="navigateTo('view-about')">About</span>
+                    <span class="active" onclick="navigateTo('view-home')">HOME</span>
+                    <span onclick="navigateTo('view-games')">GAMES</span>
+                    <span onclick="navigateTo('view-leaderboard')">LEADERBOARD</span>
+                    <span onclick="navigateTo('view-about')">ABOUT</span>
+                    <span onclick="navigateTo('view-settings')">SETTINGS</span>
+                </div>
+                <div class="nav-action">
+                    <button class="magical-btn-small" onclick="navigateTo('view-games')">
+                        <span class="btn-icon">🏰</span> Enter the Castle
+                    </button>
                 </div>
             </nav>
 
             <header class="hero">
+                <div class="ornament top-ornament gs-reveal"></div>
                 <h1 class="glow-text gs-reveal gs-title">WIZARD'S<br>ACADEMY</h1>
+                <div class="ornament bottom-ornament gs-reveal"></div>
+                
                 <p class="subtitle gs-reveal gs-subtitle">
-                    Welcome to the greatest school of magic.<br>
-                    Master ancient spells, discover hidden secrets,<br>
-                    and become the next Grand Wizard.
+                    WELCOME TO THE GREATEST SCHOOL OF MAGIC.<br>
+                    MASTER ANCIENT SPELLS, DISCOVER HIDDEN SECRETS,<br>
+                    AND BECOME THE NEXT GRAND WIZARD.
                 </p>
             </header>
             
-            <div class="divider gs-reveal gs-divider">
-                <span></span> ENTER THE CASTLE <span></span>
-            </div>
+            <main class="three-column-layout gs-reveal">
+                <!-- Left: Quote Card -->
+                <aside class="side-panel left-panel gs-btn">
+                    <div class="quote-card">
+                        <div class="feather-icon">🪶</div>
+                        <p class="quote-text">"It takes a great deal of bravery to stand up to our enemies, but just as much to stand up to our friends."</p>
+                        <p class="quote-author">— ALBUS DUMBLEDORE</p>
+                    </div>
+                </aside>
 
-            <main>
-                <div class="menu-buttons">
-                    <button class="magical-btn gs-reveal gs-btn" onclick="navigateTo('view-games')">
-                        <span class="btn-icon">⚡</span> Play Games
-                    </button>
-                    <button class="magical-btn gs-reveal gs-btn" onclick="navigateTo('view-leaderboard')">
-                        <span class="btn-icon">🏆</span> Leaderboard
-                    </button>
-                    <button class="magical-btn gs-reveal gs-btn" onclick="navigateTo('view-about')">
-                        <span class="btn-icon">📖</span> About
-                    </button>
-                    <button class="magical-btn gs-reveal gs-btn" onclick="navigateTo('view-settings')">
-                        <span class="btn-icon">⚙</span> Settings
-                    </button>
+                <!-- Center: Menu Buttons -->
+                <div class="center-panel">
+                    <div class="menu-buttons">
+                        <button class="magical-btn gs-btn" onclick="navigateTo('view-games')">
+                            <span class="btn-icon">⚡</span> PLAY GAMES
+                        </button>
+                        <button class="magical-btn gs-btn" onclick="navigateTo('view-leaderboard')">
+                            <span class="btn-icon">🏆</span> LEADERBOARD
+                        </button>
+                        <button class="magical-btn gs-btn" onclick="navigateTo('view-about')">
+                            <span class="btn-icon">📖</span> ABOUT
+                        </button>
+                        <button class="magical-btn gs-btn" onclick="navigateTo('view-settings')">
+                            <span class="btn-icon">⚙</span> SETTINGS
+                        </button>
+                    </div>
                 </div>
+
+                <!-- Right: House Selection -->
+                <aside class="side-panel right-panel gs-btn">
+                    <div class="house-selection">
+                        <h3 class="panel-title">CHOOSE YOUR HOUSE</h3>
+                        <div class="house-crests">
+                            <div class="crest gryffindor" onclick="selectHouse('gryffindor')">🦁</div>
+                            <div class="crest ravenclaw" onclick="selectHouse('ravenclaw')">🦅</div>
+                            <div class="crest slytherin" onclick="selectHouse('slytherin')">🐍</div>
+                            <div class="crest hufflepuff" onclick="selectHouse('hufflepuff')">🦡</div>
+                        </div>
+                        <div class="house-labels">
+                            <span>GRYFFINDOR</span>
+                            <span>RAVENCLAW</span>
+                            <span>SLYTHERIN</span>
+                            <span>HUFFLEPUFF</span>
+                        </div>
+                        <p class="panel-footer">YOUR JOURNEY BEGINS HERE</p>
+                    </div>
+                </aside>
             </main>
+
+            <footer class="app-footer gs-reveal gs-btn">
+                <div class="footer-socials">
+                    <span>👾</span>
+                    <span>🐙</span>
+                    <span>🐦</span>
+                    <span>📷</span>
+                </div>
+                <div class="footer-copyright">
+                    &copy; 2026 Wizard's Academy. All rights reserved.
+                </div>
+                <div class="footer-audio" onclick="toggleAudio()">
+                    <span class="audio-icon">🔊</span> AMBIENT <span id="audio-status">ON</span>
+                </div>
+            </footer>
         </div>
 
         <!-- Games Selection View -->

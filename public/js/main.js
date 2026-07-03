@@ -413,3 +413,41 @@ function getRandomColor() {
     const colors = ['#8b5cf6', '#3b82f6', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6'];
     return colors[Math.floor(Math.random() * colors.length)];
 }
+
+// --- AAA UI Features ---
+function selectHouse(houseName) {
+    if(clickAudio) {
+        clickAudio.currentTime = 0;
+        clickAudio.volume = 0.5;
+        clickAudio.play().catch(e => {});
+    }
+
+    const houseColors = {
+        gryffindor: '#E25822',
+        ravenclaw: '#0E1A40',
+        slytherin: '#1A472A',
+        hufflepuff: '#F0C75E'
+    };
+
+    if (houseColors[houseName]) {
+        document.documentElement.style.setProperty('--primary-color', houseColors[houseName]);
+        // Also update text color slightly for UI feedback
+        document.documentElement.style.setProperty('--accent-glow', houseColors[houseName]);
+    }
+}
+
+function toggleAudio() {
+    if (!ambientAudio) return;
+    const statusSpan = document.getElementById('audio-status');
+    const audioIcon = document.querySelector('.audio-icon');
+    
+    if (ambientAudio.paused) {
+        ambientAudio.play().catch(e => console.log('Play blocked', e));
+        statusSpan.textContent = 'ON';
+        if (audioIcon) audioIcon.textContent = '🔊';
+    } else {
+        ambientAudio.pause();
+        statusSpan.textContent = 'OFF';
+        if (audioIcon) audioIcon.textContent = '🔇';
+    }
+}
