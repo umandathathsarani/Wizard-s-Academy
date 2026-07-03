@@ -704,3 +704,72 @@ body {
     margin-bottom: 1rem;
     text-shadow: 0 0 15px var(--primary-color);
 }
+
+/* --- Flying Challenge Game --- */
+#fly-play-screen {
+    width: 100%;
+}
+
+.flying-arena {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background: linear-gradient(to bottom, #101522, #05070F);
+    border: 2px solid var(--primary-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+    cursor: pointer;
+}
+
+.flying-arena::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 200%; height: 100%;
+    background: url('https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog1.png') repeat-x;
+    background-size: 50% 100%;
+    opacity: 0.1;
+    animation: flyCloudMove 20s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes flyCloudMove {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.player-broom {
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    font-size: 3rem;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-origin: center;
+    z-index: 10;
+    user-select: none;
+}
+
+.obstacle {
+    position: absolute;
+    width: 60px;
+    background: linear-gradient(to right, #2a2a2a, #1a1a1a, #2a2a2a);
+    border-left: 2px solid var(--primary-color);
+    border-right: 2px solid var(--primary-color);
+    box-shadow: 0 0 15px rgba(0,0,0,0.8);
+}
+
+.obstacle.top {
+    top: 0;
+    border-bottom: 4px solid var(--accent-color);
+    border-radius: 0 0 10px 10px;
+}
+
+.obstacle.bottom {
+    bottom: 0;
+    border-top: 4px solid var(--accent-color);
+    border-radius: 10px 10px 0 0;
+}
