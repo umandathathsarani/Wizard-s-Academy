@@ -39,7 +39,7 @@ function startFlyingGame() {
 }
 
 function handleFlyKey(e) {
-    if (e.code === 'Space' && !flyIsGameOver) {
+    if ((e.code === 'Space' || e.code === 'ArrowUp') && !flyIsGameOver) {
         e.preventDefault();
         flyUp();
     }

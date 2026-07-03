@@ -31,6 +31,12 @@ function startSpellCasting() {
     
     document.getElementById('spell-feedback').textContent = '';
     const input = document.getElementById('spell-input');
+    
+    if (!window.spellInputListenerAttached && input) {
+        input.addEventListener('input', handleSpellInput);
+        window.spellInputListenerAttached = true;
+    }
+
     input.value = '';
     input.focus();
 
@@ -58,7 +64,7 @@ function nextSpell() {
     input.value = '';
 }
 
-document.getElementById('spell-input')?.addEventListener('input', (e) => {
+function handleSpellInput(e) {
     const typed = e.target.value;
     const feedback = document.getElementById('spell-feedback');
     
@@ -79,7 +85,7 @@ document.getElementById('spell-input')?.addEventListener('input', (e) => {
         feedback.textContent = '';
         feedback.classList.remove('error');
     }
-});
+}
 
 function endSpellCasting() {
     clearInterval(spellGameInterval);
