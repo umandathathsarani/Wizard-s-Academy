@@ -1,12 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Outfit:wght@300;400;500&display=swap');
+
 :root {
-    --bg-color: #0b1020;
-    --card-bg: #151b31;
-    --primary-color: #8b5cf6;
+    --bg-color: #03050a;
+    --card-bg: rgba(15, 20, 35, 0.4);
+    --primary-color: #a78bfa; /* Elegant soft purple */
     --secondary-color: #3b82f6;
-    --accent-color: #facc15;
-    --text-color: #ffffff;
+    --accent-color: #d4af37; /* Premium metallic gold */
+    --text-color: #f1f5f9;
+    --text-muted: #94a3b8;
     --font-heading: 'Cinzel', serif;
-    --font-body: 'Lora', serif;
+    --font-body: 'Outfit', sans-serif; /* Modern, clean sans-serif for UI */
 }
 
 * {
@@ -29,6 +32,7 @@ body {
     flex-direction: column;
     overflow-x: hidden;
     position: relative;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* Base Overlays */
@@ -36,13 +40,14 @@ body::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(to bottom, rgba(11, 16, 32, 0.4), rgba(11, 16, 32, 0.9));
+    background: linear-gradient(135deg, rgba(3, 5, 10, 0.8) 0%, rgba(11, 16, 32, 0.6) 100%);
     z-index: -1;
 }
 
-/* typography */
+/* Typography */
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+    font-weight: 600;
 }
 
 .app-container {
@@ -61,74 +66,87 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero {
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
 }
 
 .glow-text {
-    color: var(--accent-color);
-    font-size: 4.5rem;
+    color: transparent;
+    background: linear-gradient(to right, #d4af37, #fef08a, #d4af37);
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-size: 5rem;
     margin-bottom: 1rem;
-    text-shadow: 0 0 10px rgba(250, 204, 21, 0.7), 0 0 20px rgba(250, 204, 21, 0.5), 0 0 30px rgba(139, 92, 246, 0.8);
-    animation: textGlow 3s infinite alternate;
+    letter-spacing: 4px;
+    text-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+    animation: goldShimmer 4s infinite linear;
+    background-size: 200% auto;
 }
 
-@keyframes textGlow {
-    from { text-shadow: 0 0 10px rgba(250, 204, 21, 0.7), 0 0 20px rgba(250, 204, 21, 0.5); }
-    to { text-shadow: 0 0 15px rgba(250, 204, 21, 0.9), 0 0 30px rgba(250, 204, 21, 0.7), 0 0 40px rgba(139, 92, 246, 1); }
+@keyframes goldShimmer {
+    to { background-position: 200% center; }
 }
 
 .subtitle {
-    font-size: 1.5rem;
-    color: #cbd5e1;
-    font-style: italic;
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    font-family: var(--font-heading);
 }
 
+/* Premium Glassmorphic Buttons */
 .menu-buttons {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    width: 300px;
+    gap: 1.25rem;
+    width: 320px;
 }
 
 .magical-btn {
-    background: rgba(21, 27, 49, 0.8);
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     color: var(--text-color);
-    border: 2px solid var(--primary-color);
-    padding: 1rem 2rem;
-    font-size: 1.25rem;
-    font-family: var(--font-heading);
-    border-radius: 8px;
-    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 1.25rem 2rem;
+    font-size: 1rem;
+    font-family: var(--font-body);
+    font-weight: 500;
+    border-radius: 12px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 4px;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .magical-btn::before {
     content: '';
     position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(250, 204, 21, 0.2), transparent);
-    transition: all 0.5s ease;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: 0.6s;
 }
 
 .magical-btn:hover {
-    background: var(--primary-color);
-    box-shadow: 0 0 25px rgba(139, 92, 246, 0.8);
-    transform: translateY(-2px);
-    border-color: var(--accent-color);
+    background: rgba(25, 30, 50, 0.6);
+    border-color: rgba(212, 175, 55, 0.4);
+    box-shadow: 0 10px 40px rgba(167, 139, 250, 0.15), 0 0 15px rgba(212, 175, 55, 0.2);
+    transform: translateY(-4px);
+    color: #fff;
+    text-shadow: 0 0 8px rgba(255,255,255,0.5);
 }
 
 .magical-btn:hover::before {
-    left: 100%;
+    transform: translateX(100%);
 }
 
 .magical-btn:active {
-    transform: translateY(1px);
-    box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+    transform: translateY(0);
 }
 
 /* Magic Cursor & Particles */
@@ -148,7 +166,7 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 50%;
     z-index: 9998;
     box-shadow: 0 0 5px var(--accent-color), 0 0 8px rgba(255, 255, 255, 0.5);
-    animation: fadeOut 1s forwards;
+    animation: fadeOut 1s forwards cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes fadeOut {
@@ -165,9 +183,9 @@ h1, h2, h3, h4, h5, h6 {
     background: url('https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog1.png') repeat-x;
     background-size: 200% auto;
     background-position: center bottom;
-    opacity: 0.3;
+    opacity: 0.15;
     animation: fogMove 60s linear infinite;
-    mix-blend-mode: screen;
+    mix-blend-mode: overlay;
 }
 
 @keyframes fogMove {
@@ -187,9 +205,9 @@ h1, h2, h3, h4, h5, h6 {
     position: absolute;
     width: 10px;
     height: 30px;
-    background: #e2e8f0;
-    border-radius: 3px;
-    box-shadow: inset -2px 0 0 rgba(0,0,0,0.1);
+    background: linear-gradient(to right, #d1d5db, #f3f4f6, #d1d5db);
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
     animation: float 4s ease-in-out infinite alternate;
 }
 .candle::before {
@@ -197,31 +215,31 @@ h1, h2, h3, h4, h5, h6 {
     position: absolute;
     top: -12px; left: 50%;
     transform: translateX(-50%);
-    width: 8px; height: 12px;
-    background: var(--accent-color);
+    width: 6px; height: 12px;
+    background: #fcd34d;
     border-radius: 50% 50% 20% 20%;
-    box-shadow: 0 0 15px var(--accent-color), 0 0 30px #f97316;
+    box-shadow: 0 0 10px #fcd34d, 0 0 20px #f59e0b;
     animation: flicker 0.5s infinite alternate;
 }
 
 @keyframes float {
     0% { transform: translateY(0); }
-    100% { transform: translateY(-20px); }
+    100% { transform: translateY(-15px); }
 }
 
 @keyframes flicker {
-    0% { opacity: 0.8; transform: translateX(-50%) scale(0.9); }
-    100% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+    0% { opacity: 0.85; transform: translateX(-50%) scale(0.95); }
+    100% { opacity: 1; transform: translateX(-50%) scale(1.05); }
 }
 
 .star {
     position: absolute;
-    background: white;
+    background: #f8fafc;
     border-radius: 50%;
     animation: twinkle infinite alternate;
 }
 
 @keyframes twinkle {
-    0% { opacity: 0.2; transform: scale(0.8); }
-    100% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 10px white; }
+    0% { opacity: 0.1; transform: scale(0.8); }
+    100% { opacity: 0.8; transform: scale(1.1); box-shadow: 0 0 8px rgba(255,255,255,0.8); }
 }
