@@ -107,15 +107,10 @@ body {
 .nav-logo {
     display: flex; align-items: center; gap: 1rem;
 }
-.nav-logo .shield {
-    display: flex; align-items: center; justify-content: center;
-    width: 40px; height: 45px;
-    background: var(--card-bg);
-    border: 1px solid var(--accent-color);
-    color: var(--accent-color);
-    font-family: var(--font-heading); font-size: 1.5rem;
-    clip-path: polygon(50% 0%, 100% 0, 100% 70%, 50% 100%, 0 70%, 0 0);
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+.nav-logo .shield-img {
+    width: 45px; height: 45px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(126, 91, 239, 0.4));
 }
 .nav-logo .logo-text {
     font-family: var(--font-heading); font-size: 1rem;

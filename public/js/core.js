@@ -95,15 +95,6 @@ function initParallax() {
             }
         });
     });
-    
-    const appContainer = document.querySelector('.app-container');
-    const parallaxContainer = document.getElementById('parallax-container');
-    if (appContainer && parallaxContainer) {
-        appContainer.addEventListener('scroll', () => {
-            const scrollY = appContainer.scrollTop;
-            parallaxContainer.style.transform = `translateY(-${scrollY * 0.3}px)`;
-        });
-    }
 }
 
 function initMagicCursor() {
