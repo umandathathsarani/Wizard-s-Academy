@@ -33,12 +33,21 @@
     max-width: 1200px;
     height: 70vh;
     border-radius: 20px;
-    overflow: hidden;
+    overflow: auto; /* Allow scrolling */
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(212, 175, 55, 0.3);
     border: 2px solid var(--accent-color);
 }
 
+.map-scroll-content {
+    position: relative;
+    width: 2000px; /* Fixed width larger than screen */
+    height: 1100px; /* Fixed height to match aspect ratio of map */
+}
+
 .map-background {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;

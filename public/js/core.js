@@ -6,7 +6,78 @@ const ambientAudio = document.getElementById('audio-ambient');
 const hoverAudio = document.getElementById('audio-hover');
 const clickAudio = document.getElementById('audio-click');
 
+// --- Custom Dialog System ---
+function initMagicalDialogs() {
+    const overlay = document.createElement('div');
+    overlay.className = 'magical-dialog-overlay';
+    overlay.id = 'magical-dialog-overlay';
+    overlay.style.setProperty('cursor', 'auto', 'important');
+    overlay.innerHTML = `
+        <div class="magical-dialog">
+            <h3 class="magical-dialog-title" id="magical-dialog-title">Notice</h3>
+            <p class="magical-dialog-message" id="magical-dialog-message"></p>
+            <div class="magical-dialog-buttons" id="magical-dialog-buttons"></div>
+        </div>
+    `;
+    document.body.appendChild(overlay);
+}
+
+window.magicalAlert = function(message, title = "The Academy Says...") {
+    return new Promise(resolve => {
+        const overlay = document.getElementById('magical-dialog-overlay');
+        document.getElementById('magical-dialog-title').textContent = title;
+        document.getElementById('magical-dialog-message').textContent = message;
+        
+        const btnContainer = document.getElementById('magical-dialog-buttons');
+        btnContainer.innerHTML = '';
+        const okBtn = document.createElement('button');
+        okBtn.className = 'magical-btn';
+        okBtn.textContent = 'OK';
+        okBtn.onclick = () => {
+            overlay.classList.remove('show');
+            resolve();
+        };
+        btnContainer.appendChild(okBtn);
+        
+        overlay.classList.add('show');
+    });
+};
+
+window.magicalConfirm = function(message, title = "Confirm") {
+    return new Promise(resolve => {
+        const overlay = document.getElementById('magical-dialog-overlay');
+        document.getElementById('magical-dialog-title').textContent = title;
+        document.getElementById('magical-dialog-message').textContent = message;
+        
+        const btnContainer = document.getElementById('magical-dialog-buttons');
+        btnContainer.innerHTML = '';
+        
+        const yesBtn = document.createElement('button');
+        yesBtn.className = 'magical-btn';
+        yesBtn.textContent = 'Yes';
+        yesBtn.onclick = () => {
+            overlay.classList.remove('show');
+            resolve(true);
+        };
+        
+        const noBtn = document.createElement('button');
+        noBtn.className = 'magical-btn-small';
+        noBtn.textContent = 'No';
+        noBtn.onclick = () => {
+            overlay.classList.remove('show');
+            resolve(false);
+        };
+        
+        btnContainer.appendChild(yesBtn);
+        btnContainer.appendChild(noBtn);
+        
+        overlay.classList.add('show');
+    });
+};
+// -----------------------------
+
 document.addEventListener('DOMContentLoaded', async () => {
+    initMagicalDialogs();
     await loadViews();
     initPreloader();
     initMagicCursor();
@@ -279,7 +350,7 @@ navigateTo = function(viewId) {
     }
 }
 
-function showNamePrompt(gameId, score, callback) {
+function showNamePrompt(gameId, score, xpGain = 50, coinsGain = 20) {
     let modal = document.getElementById('name-entry-modal');
     if (!modal) {
         modal = document.createElement('div');
@@ -309,27 +380,31 @@ function showNamePrompt(gameId, score, callback) {
                 align-items: center;
                 justify-content: center;
                 opacity: 0;
-                pointer-events: none;
-                transition: opacity 0.3s ease;
+                visibility: hidden;
+                transition: opacity 0.3s, visibility 0.3s;
+                cursor: auto !important;
             }
             .modal-overlay.active {
                 opacity: 1;
-                pointer-events: auto;
+                visibility: visible;
             }
-            .modal-content {
-                background: var(--card-bg);
-                border: 1px solid rgba(167, 139, 250, 0.5);
-                border-radius: 20px;
+            .modal-overlay .modal-content {
+                background: url('https://www.transparenttextures.com/patterns/aged-paper.png'), #1a1525;
                 padding: 3rem;
+                border-radius: 20px;
+                border: 2px solid var(--accent-color);
+                box-shadow: 0 0 50px rgba(212, 175, 55, 0.2);
                 text-align: center;
-                max-width: 400px;
-                width: 90%;
-                box-shadow: 0 10px 40px rgba(0,0,0,0.8), inset 0 0 20px rgba(167, 139, 250, 0.2);
                 transform: scale(0.9);
                 transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                max-width: 400px;
+                width: 90%;
             }
             .modal-overlay.active .modal-content {
                 transform: scale(1);
+            }
+            .magical-dialog-overlay {
+                cursor: auto !important;
             }
         `;
         document.head.appendChild(style);
@@ -369,8 +444,8 @@ function showNamePrompt(gameId, score, callback) {
             
             // Award XP and Coins if logged in
             if (typeof RPGEngine !== 'undefined' && RPGEngine.currentUser) {
-                await RPGEngine.addXP(50);
-                await RPGEngine.addCoins(20);
+                await RPGEngine.addXP(xpGain);
+                await RPGEngine.addCoins(coinsGain);
                 await RPGEngine.updateQuestProgress('play_game', 1);
                 await RPGEngine.updateQuestProgress('score_' + gameId, score);
             }

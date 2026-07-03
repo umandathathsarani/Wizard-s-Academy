@@ -9,11 +9,14 @@ const DivinationGame = {
         "Avoid the third-floor corridor today. The stairs are feeling mischievous."
     ],
     hasGazedToday: false,
+    isGazing: false,
 
     gaze: function() {
-        if (!RPGEngine.currentUser) return alert('You must be logged in to gaze into the crystal ball!');
-        if (this.hasGazedToday) return alert('The mists have settled. The future can only be read once per visit.');
+        if (!RPGEngine.currentUser) return magicalAlert('You must be logged in to gaze into the crystal ball!');
+        if (this.hasGazedToday) return magicalAlert('The mists have settled. The future can only be read once per visit.');
+        if (this.isGazing) return;
 
+        this.isGazing = true;
         const ball = document.getElementById('crystal-ball');
         ball.classList.add('gazing');
         
@@ -22,11 +25,12 @@ const DivinationGame = {
         setTimeout(() => {
             ball.classList.remove('gazing');
             this.revealFortune();
-        }, 3000);
+        }, 1500);
     },
 
     revealFortune: function() {
         this.hasGazedToday = true;
+        this.isGazing = false;
         const fortuneDisplay = document.getElementById('fortune-display');
         const fortuneText = document.getElementById('fortune-text');
         const rewardText = document.getElementById('fortune-reward');
@@ -56,6 +60,7 @@ const DivinationGame = {
 
     reset: function() {
         this.hasGazedToday = false;
+        this.isGazing = false;
         document.getElementById('fortune-display').classList.add('hidden');
     }
 };

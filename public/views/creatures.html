@@ -3,23 +3,24 @@
     
     <div class="game-header">
         <h2 class="glow-text">Care of Magical Creatures</h2>
-        <p id="creature-status-text">A Hippogriff is resting in the paddock. You must bow to earn its trust before you can interact with it.</p>
+        <p id="creature-status-text">Loading paddock...</p>
     </div>
     
     <div class="creature-paddock">
-        <div id="hippogriff" class="hippogriff">🦅</div>
+        <div id="creature-icon" class="creature-icon">🦅</div>
         
         <div class="trust-bar-container">
-            <div class="trust-label">Hippogriff Trust</div>
+            <div class="trust-label" id="trust-label">Creature Trust</div>
             <div class="trust-bar-bg">
                 <div id="trust-bar-fill" class="trust-bar-fill"></div>
             </div>
         </div>
         
         <div class="creature-actions">
-            <button id="btn-bow" class="magical-btn" onclick="CreaturesGame.bow()">Bow Slowly</button>
-            <button id="btn-pet" class="magical-btn" onclick="CreaturesGame.pet()" disabled>Pet</button>
-            <button id="btn-feed" class="magical-btn" onclick="CreaturesGame.feed()" disabled>Feed Ferret</button>
+            <button id="btn-bow" class="magical-btn" onclick="CreaturesGame.bow()">Action 1</button>
+            <button id="btn-pet" class="magical-btn" onclick="CreaturesGame.pet()" disabled>Action 2</button>
+            <button id="btn-feed" class="magical-btn" onclick="CreaturesGame.feed()" disabled>Action 3</button>
+            <button id="btn-restart" class="magical-btn hidden" onclick="CreaturesGame.nextCreature()">Approach Next Creature</button>
         </div>
     </div>
 </div>

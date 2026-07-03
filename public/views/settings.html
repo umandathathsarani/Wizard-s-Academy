@@ -81,8 +81,8 @@
     }
     
     async function resetGameData() {
-        if(!RPGEngine.currentUser) return alert('Not logged in.');
-        const confirmDelete = confirm('Are you sure you want to completely erase your character and start over? This cannot be undone.');
+        if(!RPGEngine.currentUser) return magicalAlert('Not logged in.');
+        const confirmDelete = await magicalConfirm('Are you sure you want to completely erase your character and start over? This cannot be undone.');
         if (!confirmDelete) return;
         
         try {
@@ -93,7 +93,7 @@
             // Delete from server (requires server endpoint, or simply clear local data for now)
             // Assuming we don't have a DELETE /api/users/:id endpoint yet, we just log out
             // and maybe reload. Let's just reload after logout.
-            alert('Your character has been abandoned. You will now return to the Sorting Ceremony.');
+            await magicalAlert('Your character has been abandoned. You will now return to the Sorting Ceremony.');
             window.location.reload();
         } catch(e) {
             console.error('Error resetting data', e);

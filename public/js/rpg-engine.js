@@ -189,9 +189,9 @@ const RPGEngine = {
         const loginLink = document.getElementById('nav-login-link');
         
         if (this.currentUser) {
-            if (loginLink) loginLink.style.display = 'none';
+            if (loginLink) loginLink.classList.add('hidden');
             if (profileLink) {
-                profileLink.style.display = 'inline-block';
+                profileLink.classList.remove('hidden');
                 profileLink.innerHTML = `${this.currentUser.username.toUpperCase()} <span class="nav-stats">Lvl ${this.currentUser.level} | 🪙 ${this.currentUser.coins}</span>`;
             }
             
@@ -206,8 +206,8 @@ const RPGEngine = {
                 cursor.textContent = '🪄';
             }
         } else {
-            if (loginLink) loginLink.style.display = 'inline-block';
-            if (profileLink) profileLink.style.display = 'none';
+            if (loginLink) loginLink.classList.remove('hidden');
+            if (profileLink) profileLink.classList.add('hidden');
         }
     },
     
@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- Sorting Ceremony Functions ---
 function startSorting() {
     const name = document.getElementById('wizard-name').value.trim();
-    if (!name) return alert("Please enter your name!");
+    if (!name) return magicalAlert("Please enter your name!");
     document.getElementById('sorting-step-1').style.display = 'none';
     document.getElementById('sorting-step-2').style.display = 'block';
 }
@@ -274,14 +274,14 @@ async function selectTrait(trait) {
         document.getElementById('assigned-house').className = `glow-text massive-text house-${house}`;
         document.getElementById('sorting-step-3').style.display = 'block';
     } else {
-        alert("The hat is confused. Try again.");
+        magicalAlert("The hat is confused. Try again.");
         document.getElementById('sorting-step-1').style.display = 'block';
     }
 }
 
 async function loginExistingUser() {
     const name = document.getElementById('wizard-name').value.trim();
-    if (!name) return alert("Please enter your name to log in!");
+    if (!name) return magicalAlert("Please enter your name to log in!");
     
     try {
         const response = await fetch('/api/users/login', {
@@ -303,10 +303,10 @@ async function loginExistingUser() {
             // Notification
             if (typeof clickAudio !== 'undefined' && clickAudio) clickAudio.play().catch(e=>{});
         } else {
-            alert(data.error || "Failed to log in.");
+            magicalAlert(data.error || "Failed to log in.");
         }
     } catch (e) {
-        alert("Network error.");
+        magicalAlert("Network error.");
     }
 }
 
@@ -569,7 +569,7 @@ async function handleBuyItem(itemId) {
         }
         updateShopView();
     } else {
-        alert(result.error);
+        magicalAlert(result.error);
         btn.textContent = 'Buy';
         btn.disabled = false;
     }
@@ -584,7 +584,7 @@ async function handleEquipItem(itemId) {
     if (result.success) {
         updateShopView();
     } else {
-        alert(result.error);
+        magicalAlert(result.error);
         btn.textContent = 'Equip';
         btn.disabled = false;
     }

@@ -13,7 +13,7 @@
     margin-right: auto;
 }
 
-.hippogriff {
+.creature-icon {
     font-size: 8rem;
     margin-bottom: 2rem;
     transition: transform 1s ease, filter 0.5s ease;
@@ -23,15 +23,15 @@
     text-shadow: 0 10px 20px rgba(0,0,0,0.5);
 }
 
-.hippogriff.bowing {
+.creature-icon.bowing {
     transform: rotate(20deg) translateY(20px);
 }
 
-.hippogriff.happy {
+.creature-icon.happy {
     animation: happyHop 0.5s ease;
 }
 
-.hippogriff.angry {
+.creature-icon.angry {
     animation: angryShake 0.4s ease;
     filter: sepia(1) hue-rotate(300deg) saturate(3);
 }

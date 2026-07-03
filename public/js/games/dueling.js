@@ -4,7 +4,7 @@ const DuelingGame = {
     isGameOver: false,
 
     init: function() {
-        if(!RPGEngine.currentUser) return alert("Log in first!");
+        if(!RPGEngine.currentUser) return magicalAlert("Log in first!");
         this.playerHp = 100;
         this.enemyHp = 100;
         this.isGameOver = false;
@@ -121,19 +121,21 @@ const DuelingGame = {
             
             const xpGain = 50;
             const coinsGain = 15;
-            RPGEngine.currentUser.xp += xpGain;
-            RPGEngine.currentUser.coins += coinsGain;
-            RPGEngine.checkLevelUp();
-            RPGEngine.saveProgress();
-            RPGEngine.updateQuestProgress('play_game', 1);
+            const score = this.playerHp; // Score is remaining HP
             
-            setTimeout(() => alert(`You won! Gained ${xpGain} XP and ${coinsGain} Galleons.`), 500);
+            setTimeout(() => {
+                magicalAlert(`You won! Gained ${xpGain} XP and ${coinsGain} Galleons.`).then(() => {
+                    if (typeof showNamePrompt !== 'undefined') {
+                        showNamePrompt('dueling', score, xpGain, coinsGain);
+                    }
+                });
+            }, 500);
         } else if (result === 'lose') {
             this.logMessage('DEFEAT. The dummy knocked you out.', 'system');
-            setTimeout(() => alert('You lost the duel. Better luck next time!'), 500);
+            setTimeout(() => magicalAlert('You lost the duel. Better luck next time!'), 500);
         } else {
             this.logMessage('DRAW. You both went down simultaneously.', 'system');
-            setTimeout(() => alert('It\'s a draw!'), 500);
+            setTimeout(() => magicalAlert('It\'s a draw!'), 500);
         }
     }
 };

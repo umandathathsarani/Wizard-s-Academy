@@ -44,7 +44,10 @@ const HerbologyGame = {
     },
 
     start: function() {
-        if (!RPGEngine.currentUser) return alert("Log in first!");
+        if (!RPGEngine.currentUser) return magicalAlert("Log in first!");
+        
+        // Ensure game is fully reset before starting a new interval
+        this.reset();
         
         document.getElementById('herb-start-screen').classList.add('hidden');
         this.isPlaying = true;
@@ -133,15 +136,16 @@ const HerbologyGame = {
         if (isWin) {
             const xpGain = Math.floor(this.score / 2);
             const coinsGain = Math.floor(this.score / 5);
-            RPGEngine.currentUser.xp += xpGain;
-            RPGEngine.currentUser.coins += coinsGain;
-            RPGEngine.checkLevelUp();
-            RPGEngine.saveProgress();
-            RPGEngine.updateQuestProgress('play_game', 1);
             
-            setTimeout(() => alert(`Class complete! You scored ${this.score}. Gained ${xpGain} XP and ${coinsGain} Galleons.`), 100);
+            setTimeout(() => {
+                magicalAlert(`Class complete! You scored ${this.score}. Gained ${xpGain} XP and ${coinsGain} Galleons.`).then(() => {
+                    if (typeof showNamePrompt !== 'undefined') {
+                        showNamePrompt('herbology', this.score, xpGain, coinsGain);
+                    }
+                });
+            }, 100);
         } else {
-            setTimeout(() => alert(`You passed out from the screaming! Score: ${this.score}. Try again.`), 100);
+            setTimeout(() => magicalAlert(`You passed out from the screaming! Score: ${this.score}. Try again.`), 100);
         }
     }
 };

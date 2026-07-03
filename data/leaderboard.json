@@ -52,5 +52,21 @@
             "name": "Rowena",
             "score": 50
         }
+    ],
+    "dueling": [
+        {
+            "name": "Binuri",
+            "score": 20
+        },
+        {
+            "name": "Binuri",
+            "score": 20
+        }
+    ],
+    "herbology": [
+        {
+            "name": "Binuri",
+            "score": 190
+        }
     ]
 }
