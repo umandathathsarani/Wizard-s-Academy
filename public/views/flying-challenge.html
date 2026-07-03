@@ -1,0 +1,22 @@
+<button class="magical-btn btn-back" onclick="endGame('view-games')">← Abandon Quest</button>
+<div class="game-header">
+    <div class="score-display">Score: <span id="fly-score">0</span></div>
+</div>
+<div class="game-arena">
+    <div id="fly-start-screen">
+        <h2>Broom Flight</h2>
+        <p style="margin: 1rem 0; color: var(--text-muted);">Click or press Space to fly. Avoid the dark clouds and pillars!</p>
+        <button class="magical-btn start-btn" onclick="startFlyingGame()">Mount Broom</button>
+    </div>
+    <div id="fly-play-screen" class="hidden">
+        <div class="flying-arena" id="flying-arena">
+            <div class="player-broom" id="player-broom">🧹</div>
+            <div id="obstacles-container"></div>
+        </div>
+    </div>
+    <div id="fly-end-screen" class="hidden">
+        <h2 id="fly-end-title">Crash!</h2>
+        <p>Final Score: <span id="fly-final-score">0</span></p>
+        <button class="magical-btn start-btn" onclick="startFlyingGame()">Fly Again</button>
+    </div>
+</div>

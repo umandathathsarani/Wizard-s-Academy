@@ -1,0 +1,74 @@
+/* --- Memory Cards Game --- */
+#memory-play-screen {
+    width: 100%;
+}
+
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    perspective: 1000px;
+    margin: 2rem auto;
+    width: 100%;
+    min-width: 320px;
+    max-width: 500px;
+}
+
+.memory-card {
+    aspect-ratio: 3/4;
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.memory-card.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--primary-color);
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.card-back {
+    background: linear-gradient(135deg, var(--card-bg), #05070F);
+    color: var(--primary-color);
+    font-size: 2rem;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(212, 175, 55, 0.05) 10px, rgba(212, 175, 55, 0.05) 20px);
+}
+
+.card-front {
+    background: var(--card-bg);
+    transform: rotateY(180deg);
+}
+
+.memory-card.matched .card-front {
+    box-shadow: 0 0 20px var(--primary-color);
+    border-color: #fff;
+    opacity: 0.8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .memory-grid {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 350px;
+    }
+    .card-face {
+        font-size: 2rem;
+    }
+}

@@ -1,0 +1,79 @@
+/* Potion Mixing Game */
+.sequence-display {
+    font-size: 3rem;
+    letter-spacing: 15px;
+    margin-bottom: 2rem;
+    min-height: 4.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    transition: opacity 0.5s;
+}
+
+.sequence-item {
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.ingredient-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.ingredient-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    font-size: 3rem;
+    padding: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 0 10px rgba(255,255,255,0.05);
+}
+
+.ingredient-btn:hover {
+    background: rgba(167, 139, 250, 0.2);
+    border-color: var(--primary-color);
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(167, 139, 250, 0.4);
+}
+
+.ingredient-btn:active {
+    transform: scale(0.95);
+}
+
+.cauldron {
+    width: 150px;
+    height: 120px;
+    background: radial-gradient(circle at 30% 30%, #334155, #0f172a);
+    border-radius: 20px 20px 60px 60px;
+    margin: 0 auto;
+    position: relative;
+    border: 4px solid #1e293b;
+    border-top: 10px solid #0f172a;
+    box-shadow: 0 20px 30px rgba(0,0,0,0.8), inset 0 -10px 20px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+.cauldron-liquid {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: var(--primary-color);
+    border-radius: 0 0 50px 50px;
+    box-shadow: 0 0 30px var(--primary-color);
+    transition: background 0.5s, height 0.3s;
+    animation: boil 2s infinite alternate;
+}
+
+@keyframes boil {
+    0% { transform: scaleY(1); opacity: 0.8; }
+    100% { transform: scaleY(1.1); opacity: 1; }
+}

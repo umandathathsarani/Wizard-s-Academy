@@ -1,0 +1,23 @@
+<button class="magical-btn btn-back" onclick="endGame('view-games')">← Abandon Quest</button>
+<div class="game-header">
+    <div class="score-display">Question <span id="quiz-progress">1</span> of 5</div>
+</div>
+<div class="game-arena">
+    <div id="quiz-start-screen">
+        <h2>The Sorting Hat</h2>
+        <p style="margin: 1rem 0; color: var(--text-muted);">Answer truthfully, for the hat sees all...</p>
+        <button class="magical-btn start-btn" onclick="startHouseQuiz()">Put on the Hat</button>
+    </div>
+    <div id="quiz-play-screen" class="hidden">
+        <h2 class="quiz-question" id="quiz-question-text">Question goes here...</h2>
+        <div class="quiz-options" id="quiz-options-container"></div>
+    </div>
+    <div id="quiz-end-screen" class="hidden">
+        <div class="quiz-result-card">
+            <div class="result-crest" id="quiz-result-crest">🦁</div>
+            <h2 id="quiz-result-title">GRYFFINDOR</h2>
+            <p id="quiz-result-desc" style="color: var(--text-muted); margin-bottom: 2rem;">You belong in Gryffindor, where dwell the brave at heart!</p>
+            <button class="magical-btn start-btn" onclick="endGame('view-home')">Return to Menu</button>
+        </div>
+    </div>
+</div>

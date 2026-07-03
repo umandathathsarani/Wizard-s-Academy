@@ -1,0 +1,72 @@
+/* --- House Quiz Game --- */
+#quiz-play-screen {
+    width: 100%;
+}
+
+.quiz-question {
+    font-size: 2rem;
+    font-family: var(--font-heading);
+    color: var(--accent-light);
+    text-align: center;
+    margin-bottom: 3rem;
+    text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+    min-height: 80px;
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.quiz-btn {
+    background: rgba(16, 21, 34, 0.8);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: var(--text-color);
+    padding: 1.5rem;
+    font-size: 1.1rem;
+    font-family: var(--font-body);
+    text-align: left;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.quiz-btn:hover {
+    background: rgba(126, 91, 239, 0.15);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 20px rgba(126, 91, 239, 0.3);
+    transform: translateX(10px);
+}
+
+.quiz-result-card {
+    background: linear-gradient(145deg, rgba(16, 21, 34, 0.9), #05070F);
+    border: 1px solid var(--primary-color);
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(0,0,0,0.8), inset 0 0 20px rgba(126, 91, 239, 0.2);
+    animation: fadeIn 1s ease-out;
+}
+
+.result-crest {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 20px var(--primary-color));
+}
+
+#quiz-result-title {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    color: var(--primary-color);
+    letter-spacing: 8px;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 15px var(--primary-color);
+}

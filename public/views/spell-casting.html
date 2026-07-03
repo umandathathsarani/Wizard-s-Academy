@@ -1,0 +1,21 @@
+<button class="magical-btn btn-back" onclick="endGame('view-games')">← Abandon Quest</button>
+<div class="game-header">
+    <div class="score-display">Score: <span id="spell-score">0</span></div>
+    <div class="timer-display">Time: <span id="spell-timer">30</span>s</div>
+</div>
+<div class="game-arena">
+    <div id="spell-start-screen">
+        <h2>Ready your wand...</h2>
+        <button class="magical-btn start-btn" onclick="startSpellCasting()">Start Casting</button>
+    </div>
+    <div id="spell-play-screen" class="hidden">
+        <div class="spell-target" id="spell-target">Wingardium Leviosa</div>
+        <input type="text" id="spell-input" class="magical-input" autocomplete="off" spellcheck="false" placeholder="Type the spell here...">
+        <div id="spell-feedback" class="feedback"></div>
+    </div>
+    <div id="spell-end-screen" class="hidden">
+        <h2>Time's Up!</h2>
+        <p>Final Score: <span id="spell-final-score">0</span></p>
+        <button class="magical-btn start-btn" onclick="startSpellCasting()">Play Again</button>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<button class="magical-btn btn-back" onclick="endGame('view-games')">← Abandon Quest</button>
+<div class="game-header">
+    <div class="score-display">Score: <span id="potion-score">0</span></div>
+    <div class="timer-display">Level: <span id="potion-level">1</span></div>
+</div>
+<div class="game-arena">
+    <div id="potion-start-screen">
+        <h2>Brewing Station</h2>
+        <p style="margin: 1rem 0; color: var(--text-muted);">Memorize the sequence of ingredients, then recreate it!</p>
+        <button class="magical-btn start-btn" onclick="startPotionMixing()">Start Brewing</button>
+    </div>
+    <div id="potion-play-screen" class="hidden">
+        <div id="potion-sequence-display" class="sequence-display"></div>
+        <div class="cauldron">
+            <div class="cauldron-liquid" id="cauldron-liquid"></div>
+        </div>
+        <div id="ingredient-buttons" class="ingredient-grid hidden">
+            <button class="ingredient-btn" onclick="selectIngredient('🌿')">🌿</button>
+            <button class="ingredient-btn" onclick="selectIngredient('💎')">💎</button>
+            <button class="ingredient-btn" onclick="selectIngredient('🍄')">🍄</button>
+            <button class="ingredient-btn" onclick="selectIngredient('🔥')">🔥</button>
+            <button class="ingredient-btn" onclick="selectIngredient('💧')">💧</button>
+            <button class="ingredient-btn" onclick="selectIngredient('🦇')">🦇</button>
+        </div>
+        <div id="potion-feedback" class="feedback"></div>
+    </div>
+    <div id="potion-end-screen" class="hidden">
+        <h2 id="potion-end-title">Explosion! 💥</h2>
+        <p>Final Score: <span id="potion-final-score">0</span></p>
+        <button class="magical-btn start-btn" onclick="startPotionMixing()">Brew Again</button>
+    </div>
+</div>

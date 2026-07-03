@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wizard's Academy</title>
     <meta name="description" content="A magical web application with mini-games">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/games/spell-casting.css">
+    <link rel="stylesheet" href="css/games/potion-mixing.css">
+    <link rel="stylesheet" href="css/games/memory-cards.css">
+    <link rel="stylesheet" href="css/games/house-quiz.css">
+    <link rel="stylesheet" href="css/games/flying-challenge.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
@@ -55,305 +61,32 @@
     
     <div class="app-container">
         <!-- Home View -->
-        <div id="view-home" class="view active">
-            
-            <nav class="top-nav gs-reveal">
-                <div class="nav-logo">
-                    <span class="shield">A</span>
-                    <span class="logo-text">WIZARD'S<br>ACADEMY</span>
-                </div>
-                <div class="nav-links">
-                    <span class="active" onclick="navigateTo('view-home')">HOME</span>
-                    <span onclick="navigateTo('view-games')">GAMES</span>
-                    <span onclick="navigateTo('view-leaderboard')">LEADERBOARD</span>
-                    <span onclick="navigateTo('view-about')">ABOUT</span>
-                    <span onclick="navigateTo('view-settings')">SETTINGS</span>
-                </div>
-                <div class="nav-action">
-                    <button class="magical-btn-small" onclick="navigateTo('view-games')">
-                        <span class="btn-icon">🏰</span> Enter the Castle
-                    </button>
-                </div>
-            </nav>
-
-            <header class="hero">
-                <div class="ornament top-ornament gs-reveal"></div>
-                <h1 class="glow-text gs-reveal gs-title">WIZARD'S<br>ACADEMY</h1>
-                <div class="ornament bottom-ornament gs-reveal"></div>
-                
-                <p class="subtitle gs-reveal gs-subtitle">
-                    WELCOME TO THE GREATEST SCHOOL OF MAGIC.<br>
-                    MASTER ANCIENT SPELLS, DISCOVER HIDDEN SECRETS,<br>
-                    AND BECOME THE NEXT GRAND WIZARD.
-                </p>
-            </header>
-            
-            <main class="three-column-layout gs-reveal">
-                <!-- Left: Quote Card -->
-                <aside class="side-panel left-panel gs-btn">
-                    <div class="quote-card">
-                        <div class="feather-icon">🪶</div>
-                        <p class="quote-text">"It takes a great deal of bravery to stand up to our enemies, but just as much to stand up to our friends."</p>
-                        <p class="quote-author">— ALBUS DUMBLEDORE</p>
-                    </div>
-                </aside>
-
-                <!-- Center: Menu Buttons -->
-                <div class="center-panel">
-                    <div class="menu-buttons">
-                        <button class="magical-btn gs-btn" onclick="navigateTo('view-games')">
-                            <span class="btn-icon">⚡</span> PLAY GAMES
-                        </button>
-                        <button class="magical-btn gs-btn" onclick="navigateTo('view-leaderboard')">
-                            <span class="btn-icon">🏆</span> LEADERBOARD
-                        </button>
-                        <button class="magical-btn gs-btn" onclick="navigateTo('view-about')">
-                            <span class="btn-icon">📖</span> ABOUT
-                        </button>
-                        <button class="magical-btn gs-btn" onclick="navigateTo('view-settings')">
-                            <span class="btn-icon">⚙</span> SETTINGS
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Right: House Selection -->
-                <aside class="side-panel right-panel gs-btn">
-                    <div class="house-selection">
-                        <h3 class="panel-title">CHOOSE YOUR HOUSE</h3>
-                        <div class="house-crests">
-                            <div class="crest gryffindor" onclick="selectHouse('gryffindor')">🦁</div>
-                            <div class="crest ravenclaw" onclick="selectHouse('ravenclaw')">🦅</div>
-                            <div class="crest slytherin" onclick="selectHouse('slytherin')">🐍</div>
-                            <div class="crest hufflepuff" onclick="selectHouse('hufflepuff')">🦡</div>
-                        </div>
-                        <div class="house-labels">
-                            <span>GRYFFINDOR</span>
-                            <span>RAVENCLAW</span>
-                            <span>SLYTHERIN</span>
-                            <span>HUFFLEPUFF</span>
-                        </div>
-                        <p class="panel-footer">YOUR JOURNEY BEGINS HERE</p>
-                    </div>
-                </aside>
-            </main>
-
-            <footer class="app-footer gs-reveal gs-btn">
-                <div class="footer-socials">
-                    <span>👾</span>
-                    <span>🐙</span>
-                    <span>🐦</span>
-                    <span>📷</span>
-                </div>
-                <div class="footer-copyright">
-                    &copy; 2026 Wizard's Academy. All rights reserved.
-                </div>
-                <div class="footer-audio" onclick="toggleAudio()">
-                    <span class="audio-icon">🔊</span> AMBIENT <span id="audio-status">ON</span>
-                </div>
-            </footer>
-        </div>
+        <div id="view-home" class="view active"></div>
 
         <!-- Games Selection View -->
-        <div id="view-games" class="view hidden">
-            <button class="magical-btn btn-back" onclick="navigateTo('view-home')">← Back</button>
-            <h2 class="view-title">Magical Mini-Games</h2>
-            <div class="games-grid">
-                <div class="game-card" onclick="navigateTo('view-spell-casting')">
-                    <div class="game-icon">⚡</div>
-                    <h3>Spell Casting</h3>
-                    <p>Type spells before time runs out!</p>
-                </div>
-                
-                <div class="game-card" onclick="navigateTo('view-potion-mixing')">
-                    <div class="game-icon">🧪</div>
-                    <h3>Potion Mixing</h3>
-                    <p>Memorize and mix ingredients!</p>
-                </div>
-                
-                <div class="game-card" onclick="navigateTo('view-memory-cards')">
-                    <div class="game-icon">🃏</div>
-                    <h3>Memory Cards</h3>
-                    <p>Find the matching magical pairs!</p>
-                </div>
-                
-                <div class="game-card" onclick="navigateTo('view-house-quiz')">
-                    <div class="game-icon">🎩</div>
-                    <h3>Sorting Quiz</h3>
-                    <p>Discover your true magical house!</p>
-                </div>
-
-                <div class="game-card" onclick="navigateTo('view-flying-challenge')">
-                    <div class="game-icon">🧹</div>
-                    <h3>Flying Challenge</h3>
-                    <p>Dodge the magical obstacles!</p>
-                </div>
-            </div>
-        </div>
+        <div id="view-games" class="view hidden"></div>
 
         <!-- Spell Casting Game View -->
-        <div id="view-spell-casting" class="view hidden">
-            <button class="magical-btn btn-back" onclick="endGame('view-games')">← Abandon Quest</button>
-            <div class="game-header">
-                <div class="score-display">Score: <span id="spell-score">0</span></div>
-                <div class="timer-display">Time: <span id="spell-timer">30</span>s</div>
-            </div>
-            
-            <div class="game-arena">
-                <div id="spell-start-screen">
-                    <h2>Ready your wand...</h2>
-                    <button class="magical-btn start-btn" onclick="startSpellCasting()">Start Casting</button>
-                </div>
-                
-                <div id="spell-play-screen" class="hidden">
-                    <div class="spell-target" id="spell-target">Wingardium Leviosa</div>
-                    <input type="text" id="spell-input" class="magical-input" autocomplete="off" spellcheck="false" placeholder="Type the spell here...">
-                    <div id="spell-feedback" class="feedback"></div>
-                </div>
-
-                <div id="spell-end-screen" class="hidden">
-                    <h2>Time's Up!</h2>
-                    <p>Final Score: <span id="spell-final-score">0</span></p>
-                    <button class="magical-btn start-btn" onclick="startSpellCasting()">Play Again</button>
-                </div>
-            </div>
-        </div>
+        <div id="view-spell-casting" class="view hidden"></div>
 
         <!-- Potion Mixing Game View -->
-        <div id="view-potion-mixing" class="view hidden">
-            <button class="magical-btn btn-back" onclick="endGame('view-games')">← Abandon Quest</button>
-            <div class="game-header">
-                <div class="score-display">Score: <span id="potion-score">0</span></div>
-                <div class="timer-display">Level: <span id="potion-level">1</span></div>
-            </div>
-            
-            <div class="game-arena">
-                <div id="potion-start-screen">
-                    <h2>Brewing Station</h2>
-                    <p style="margin: 1rem 0; color: var(--text-muted);">Memorize the sequence of ingredients, then recreate it!</p>
-                    <button class="magical-btn start-btn" onclick="startPotionMixing()">Start Brewing</button>
-                </div>
-                
-                <div id="potion-play-screen" class="hidden">
-                    <div id="potion-sequence-display" class="sequence-display">
-                        <!-- Sequence shown here -->
-                    </div>
-                    
-                    <div class="cauldron">
-                        <div class="cauldron-liquid" id="cauldron-liquid"></div>
-                    </div>
-
-                    <div id="ingredient-buttons" class="ingredient-grid hidden">
-                        <button class="ingredient-btn" onclick="selectIngredient('🌿')">🌿</button>
-                        <button class="ingredient-btn" onclick="selectIngredient('💎')">💎</button>
-                        <button class="ingredient-btn" onclick="selectIngredient('🍄')">🍄</button>
-                        <button class="ingredient-btn" onclick="selectIngredient('🔥')">🔥</button>
-                        <button class="ingredient-btn" onclick="selectIngredient('💧')">💧</button>
-                        <button class="ingredient-btn" onclick="selectIngredient('🦇')">🦇</button>
-                    </div>
-
-                    <div id="potion-feedback" class="feedback"></div>
-                </div>
-
-                <div id="potion-end-screen" class="hidden">
-                    <h2 id="potion-end-title">Explosion! 💥</h2>
-                    <p>Final Score: <span id="potion-final-score">0</span></p>
-                    <button class="magical-btn start-btn" onclick="startPotionMixing()">Brew Again</button>
-                </div>
-            </div>
-        </div>
+        <div id="view-potion-mixing" class="view hidden"></div>
 
         <!-- Memory Cards Game View -->
-        <div id="view-memory-cards" class="view hidden">
-            <button class="magical-btn btn-back" onclick="endGame('view-games')">← Abandon Quest</button>
-            <div class="game-header">
-                <div class="score-display">Score: <span id="memory-score">0</span></div>
-                <div class="timer-display">Time: <span id="memory-timer">60</span>s</div>
-            </div>
-            
-            <div class="game-arena">
-                <div id="memory-start-screen">
-                    <h2>Magical Pairs</h2>
-                    <p style="margin: 1rem 0; color: var(--text-muted);">Find all the matching cards before time runs out!</p>
-                    <button class="magical-btn start-btn" onclick="startMemoryGame()">Deal Cards</button>
-                </div>
-                
-                <div id="memory-play-screen" class="hidden">
-                    <div id="memory-grid" class="memory-grid">
-                        <!-- Cards injected by JS -->
-                    </div>
-                </div>
-
-                <div id="memory-end-screen" class="hidden">
-                    <h2 id="memory-end-title">Time's Up!</h2>
-                    <p>Final Score: <span id="memory-final-score">0</span></p>
-                    <button class="magical-btn start-btn" onclick="startMemoryGame()">Play Again</button>
-                </div>
-            </div>
-        </div>
+        <div id="view-memory-cards" class="view hidden"></div>
         
         <!-- House Quiz Game View -->
-        <div id="view-house-quiz" class="view hidden">
-            <button class="magical-btn btn-back" onclick="endGame('view-games')">← Abandon Quest</button>
-            <div class="game-header">
-                <div class="score-display">Question <span id="quiz-progress">1</span> of 5</div>
-            </div>
-            
-            <div class="game-arena">
-                <div id="quiz-start-screen">
-                    <h2>The Sorting Hat</h2>
-                    <p style="margin: 1rem 0; color: var(--text-muted);">Answer truthfully, for the hat sees all...</p>
-                    <button class="magical-btn start-btn" onclick="startHouseQuiz()">Put on the Hat</button>
-                </div>
-                
-                <div id="quiz-play-screen" class="hidden">
-                    <h2 class="quiz-question" id="quiz-question-text">Question goes here...</h2>
-                    <div class="quiz-options" id="quiz-options-container">
-                        <!-- Buttons injected by JS -->
-                    </div>
-                </div>
-
-                <div id="quiz-end-screen" class="hidden">
-                    <div class="quiz-result-card">
-                        <div class="result-crest" id="quiz-result-crest">🦁</div>
-                        <h2 id="quiz-result-title">GRYFFINDOR</h2>
-                        <p id="quiz-result-desc" style="color: var(--text-muted); margin-bottom: 2rem;">You belong in Gryffindor, where dwell the brave at heart!</p>
-                        <button class="magical-btn start-btn" onclick="endGame('view-home')">Return to Menu</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div id="view-house-quiz" class="view hidden"></div>
         
         <!-- Flying Challenge Game View -->
-        <div id="view-flying-challenge" class="view hidden">
-            <button class="magical-btn btn-back" onclick="endGame('view-games')">← Abandon Quest</button>
-            <div class="game-header">
-                <div class="score-display">Score: <span id="fly-score">0</span></div>
-            </div>
-            
-            <div class="game-arena">
-                <div id="fly-start-screen">
-                    <h2>Broom Flight</h2>
-                    <p style="margin: 1rem 0; color: var(--text-muted);">Click or press Space to fly. Avoid the dark clouds and pillars!</p>
-                    <button class="magical-btn start-btn" onclick="startFlyingGame()">Mount Broom</button>
-                </div>
-                
-                <div id="fly-play-screen" class="hidden">
-                    <div class="flying-arena" id="flying-arena">
-                        <div class="player-broom" id="player-broom">🧹</div>
-                        <div id="obstacles-container"></div>
-                    </div>
-                </div>
-
-                <div id="fly-end-screen" class="hidden">
-                    <h2 id="fly-end-title">Crash!</h2>
-                    <p>Final Score: <span id="fly-final-score">0</span></p>
-                    <button class="magical-btn start-btn" onclick="startFlyingGame()">Fly Again</button>
-                </div>
-            </div>
-        </div>
-
+        <div id="view-flying-challenge" class="view hidden"></div>
     </div>
 
-    <script src="js/main.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/games/spell-casting.js"></script>
+    <script src="js/games/potion-mixing.js"></script>
+    <script src="js/games/memory-cards.js"></script>
+    <script src="js/games/house-quiz.js"></script>
+    <script src="js/games/flying-challenge.js"></script>
 </body>
 </html>
