@@ -97,7 +97,8 @@
     border: 1px solid var(--accent-dark);
     border-radius: 10px;
     padding: 2rem;
-    max-width: 500px;
+    max-width: 650px;
+    width: 90%;
     text-align: center;
     box-shadow: 0 0 20px rgba(155, 89, 182, 0.4);
     animation: fadeIn 1s forwards;

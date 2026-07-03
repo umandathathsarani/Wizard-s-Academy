@@ -122,6 +122,7 @@ function initPreloader() {
 
 function playEntranceAnimations() {
     if (typeof gsap !== 'undefined') {
+        gsap.config({nullTargetWarn: false});
         gsap.fromTo('.gs-title', { y: 50, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 1.5, ease: 'power3.out' });
         gsap.fromTo('.gs-subtitle', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, delay: 0.3, ease: 'power2.out' });
         gsap.fromTo('.gs-divider', { width: 0, opacity: 0 }, { width: '100%', opacity: 1, duration: 1, delay: 0.6, ease: 'power2.out' });

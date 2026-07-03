@@ -28,7 +28,7 @@ const DivinationGame = {
         }, 1500);
     },
 
-    revealFortune: function() {
+    revealFortune: async function() {
         this.hasGazedToday = true;
         this.isGazing = false;
         const fortuneDisplay = document.getElementById('fortune-display');
@@ -44,16 +44,14 @@ const DivinationGame = {
         const amount = Math.floor(Math.random() * 30) + 10;
         
         if (isCoins) {
-            RPGEngine.currentUser.coins += amount;
+            await RPGEngine.addCoins(amount);
             rewardText.textContent = `The mists have granted you +${amount} Galleons!`;
         } else {
-            RPGEngine.currentUser.xp += amount;
+            await RPGEngine.addXP(amount);
             rewardText.textContent = `The mists have granted you +${amount} XP!`;
-            RPGEngine.checkLevelUp();
         }
 
-        RPGEngine.saveProgress();
-        RPGEngine.updateQuestProgress('play_game', 1);
+        await RPGEngine.updateQuestProgress('play_game', 1);
         
         fortuneDisplay.classList.remove('hidden');
     },

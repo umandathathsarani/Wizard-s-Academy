@@ -195,14 +195,12 @@ const CreaturesGame = {
         if (this.trust >= 100 && this.creatureState !== 'won') {
             this.creatureState = 'won';
             const c = creatureData[this.currentIndex];
-            setTimeout(() => {
+            setTimeout(async () => {
                 const xpGain = 100;
                 const coinsGain = 20;
-                RPGEngine.currentUser.xp += xpGain;
-                RPGEngine.currentUser.coins += coinsGain;
-                RPGEngine.checkLevelUp();
-                RPGEngine.saveProgress();
-                RPGEngine.updateQuestProgress('play_game', 1);
+                await RPGEngine.addXP(xpGain);
+                await RPGEngine.addCoins(coinsGain);
+                await RPGEngine.updateQuestProgress('play_game', 1);
                 
                 magicalAlert(`${c.msgs.winAlert} You gained ${xpGain} XP and ${coinsGain} Galleons!`);
                 document.getElementById('creature-status-text').textContent = c.msgs.winText;

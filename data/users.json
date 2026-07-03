@@ -11,11 +11,12 @@
         "id": "1783073980834624",
         "username": "Binuri",
         "house": "slytherin",
-        "level": 3,
-        "xp": 31,
-        "coins": 142,
+        "level": 4,
+        "xp": 174,
+        "coins": 20,
         "inventory": [
-            "pet_toad"
+            "pet_toad",
+            "wand_dragon"
         ],
         "equipped": {
             "wand": null,
