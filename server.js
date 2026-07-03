@@ -120,6 +120,21 @@ app.post('/api/users/register', (req, res) => {
     });
 });
 
+// Login user by username
+app.post('/api/users/login', (req, res) => {
+    const { username } = req.body;
+    if (!username) return res.status(400).json({ error: 'Missing username' });
+    
+    readUsers((users) => {
+        const user = users.find(u => u.username.toLowerCase() === username.toLowerCase());
+        if (user) {
+            res.json({ success: true, user });
+        } else {
+            res.status(404).json({ error: 'Wizard not found. Please enroll first!' });
+        }
+    });
+});
+
 // Get user
 app.get('/api/users/:id', (req, res) => {
     readUsers((users) => {
@@ -179,6 +194,10 @@ app.post('/api/users/:id/buy', (req, res) => {
             // Ensure inventory arrays exist for old users
             if (!user.inventory) user.inventory = [];
             if (!user.equipped) user.equipped = { wand: null, pet: null };
+            
+            if (item.requiredLevel && user.level < item.requiredLevel) {
+                return res.status(400).json({ error: `Requires Level ${item.requiredLevel}` });
+            }
             
             if (user.coins < item.price) {
                 return res.status(400).json({ error: 'Not enough Galleons' });

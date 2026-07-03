@@ -5,7 +5,8 @@
     "type": "wand",
     "description": "An immensely powerful wand. Changes your cursor magic.",
     "price": 1000,
-    "icon": "🪄"
+    "icon": "🪄",
+    "requiredLevel": 10
   },
   {
     "id": "wand_phoenix",
@@ -13,7 +14,46 @@
     "type": "wand",
     "description": "A wand of fiery power and loyalty. Changes your cursor magic.",
     "price": 500,
-    "icon": "🎇"
+    "icon": "🎇",
+    "requiredLevel": 5
+  },
+  {
+    "id": "wand_dragon",
+    "name": "Dragon Heartstring Wand",
+    "type": "wand",
+    "description": "Produces the most powerful spells. Changes your cursor magic.",
+    "price": 300,
+    "icon": "💥",
+    "requiredLevel": 3
+  },
+  {
+    "id": "wand_unicorn",
+    "name": "Unicorn Hair Wand",
+    "type": "wand",
+    "description": "Consistent and loyal. Changes your cursor magic.",
+    "price": 200,
+    "icon": "✨",
+    "requiredLevel": 2
+  },
+  {
+    "id": "pet_phoenix",
+    "name": "Fawkes the Phoenix",
+    "type": "pet",
+    "description": "A majestic and rare companion. Grants +30% XP in all games.",
+    "price": 1500,
+    "xpBoost": 0.30,
+    "icon": "🦅",
+    "requiredLevel": 12
+  },
+  {
+    "id": "pet_black_cat",
+    "name": "Midnight Cat",
+    "type": "pet",
+    "description": "A stealthy feline friend. Grants +15% XP in all games.",
+    "price": 400,
+    "xpBoost": 0.15,
+    "icon": "🐈‍⬛",
+    "requiredLevel": 4
   },
   {
     "id": "pet_snowy_owl",
@@ -25,13 +65,13 @@
     "icon": "🦉"
   },
   {
-    "id": "pet_black_cat",
-    "name": "Midnight Cat",
+    "id": "pet_pygmy_puff",
+    "name": "Pygmy Puff",
     "type": "pet",
-    "description": "A stealthy feline friend. Grants +15% XP in all games.",
-    "price": 400,
-    "xpBoost": 0.15,
-    "icon": "🐈‍⬛"
+    "description": "Cute, fluffy, and pink. Grants +8% XP in all games.",
+    "price": 150,
+    "xpBoost": 0.08,
+    "icon": "🌸"
   },
   {
     "id": "pet_toad",
@@ -43,12 +83,33 @@
     "icon": "🐸"
   },
   {
+    "id": "potion_felix",
+    "name": "Felix Felicis",
+    "type": "potion",
+    "description": "Liquid luck. Consume for an instant 400 XP boost.",
+    "price": 600,
+    "instantXp": 400,
+    "icon": "🍾",
+    "requiredLevel": 8
+  },
+  {
+    "id": "potion_polyjuice",
+    "name": "Polyjuice Potion",
+    "type": "potion",
+    "description": "A complex brew. Consume for an instant 200 XP boost.",
+    "price": 300,
+    "instantXp": 200,
+    "icon": "🧪",
+    "requiredLevel": 5
+  },
+  {
     "id": "potion_xp",
     "name": "Elixir of Insight",
     "type": "potion",
     "description": "A sparkling blue potion. Consume for an instant 100 XP boost.",
     "price": 150,
     "instantXp": 100,
-    "icon": "🧪"
+    "icon": "🧃",
+    "requiredLevel": 2
   }
 ]

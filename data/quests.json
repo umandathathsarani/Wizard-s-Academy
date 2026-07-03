@@ -2,46 +2,64 @@
     {
         "id": "play_any_3",
         "title": "Dedicated Student",
-        "description": "Play 3 mini-games of any kind.",
+        "description": "Play 3 mini-games of any kind. (Easy)",
         "actionType": "play_game",
         "targetValue": 3,
-        "rewardXp": 100,
+        "rewardXp": 0,
         "rewardCoins": 20
     },
     {
         "id": "score_spell_100",
         "title": "Charms Practice",
-        "description": "Earn a total of 100 points in Spell Casting.",
+        "description": "Earn a total of 100 points in Spell Casting. (Medium)",
         "actionType": "score_spell-casting",
         "targetValue": 100,
-        "rewardXp": 100,
-        "rewardCoins": 30
+        "rewardXp": 50,
+        "rewardCoins": 0
     },
     {
         "id": "score_potion_100",
-        "title": "Brewing Mastery",
-        "description": "Earn a total of 100 points in Potion Mixing.",
+        "title": "Advanced Brewing",
+        "description": "Earn a total of 200 points in Potion Mixing. (Hard)",
         "actionType": "score_potion-mixing",
-        "targetValue": 100,
-        "rewardXp": 100,
-        "rewardCoins": 30
+        "targetValue": 200,
+        "rewardXp": 0,
+        "rewardCoins": 100
     },
     {
         "id": "score_memory_100",
-        "title": "Sharp Mind",
-        "description": "Earn a total of 100 points in Memory Cards.",
+        "title": "Unbreakable Focus",
+        "description": "Earn a total of 300 points in Memory Cards. (Expert)",
         "actionType": "score_memory-cards",
-        "targetValue": 100,
+        "targetValue": 300,
         "rewardXp": 100,
-        "rewardCoins": 30
+        "rewardCoins": 0
+    },
+    {
+        "id": "score_quiz_100",
+        "title": "Hogwarts Historian",
+        "description": "Earn a total of 100 points in the House Quiz. (Medium)",
+        "actionType": "score_house-quiz",
+        "targetValue": 100,
+        "rewardXp": 0,
+        "rewardCoins": 50
+    },
+    {
+        "id": "score_flying_200",
+        "title": "Seeker's Agility",
+        "description": "Earn a total of 200 points in the Flying Challenge. (Hard)",
+        "actionType": "score_flying-challenge",
+        "targetValue": 200,
+        "rewardXp": 50,
+        "rewardCoins": 0
     },
     {
         "id": "buy_item",
         "title": "Window Shopper",
-        "description": "Visit Diagon Alley and buy an item or potion.",
+        "description": "Visit Diagon Alley and buy an item or potion. (Easy)",
         "actionType": "buy_item",
         "targetValue": 1,
-        "rewardXp": 100,
+        "rewardXp": 20,
         "rewardCoins": 0
     }
 ]

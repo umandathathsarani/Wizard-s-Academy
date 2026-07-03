@@ -1,3 +1,9 @@
+<style>
+    .no-decoration { text-decoration: none; color: inherit; }
+    .accent-link { color: var(--accent-light); }
+    .hidden { display: none; }
+</style>
+
 <nav class="top-nav gs-reveal">
     <div class="nav-logo">
         <img src="favicon.png" alt="Logo" class="shield-img">
@@ -9,8 +15,8 @@
         <span onclick="navigateTo('view-leaderboard')">LEADERBOARD</span>
         <span onclick="navigateTo('view-about')">ABOUT</span>
         <span onclick="navigateTo('view-settings')">SETTINGS</span>
-        <span id="nav-login-link" onclick="navigateTo('view-sorting-ceremony')" style="color: var(--accent-light);">ENROLL</span>
-        <span id="nav-profile-link" onclick="navigateTo('view-profile')" style="display:none; color: var(--accent-light);"></span>
+        <span id="nav-login-link" onclick="navigateTo('view-sorting-ceremony')" class="accent-link">LOGIN / ENROLL</span>
+        <span id="nav-profile-link" onclick="navigateTo('view-profile')" class="accent-link hidden"></span>
     </div>
     <div class="nav-action">
         <button class="magical-btn-small" onclick="navigateTo('view-games')">
@@ -73,10 +79,10 @@
 </main>
 <footer class="app-footer gs-reveal gs-btn">
     <div class="footer-socials">
-        <span>👾</span>
-        <span>🐙</span>
-        <span>🐦</span>
-        <span>📷</span>
+        <a href="mailto:umathathsarani2003@gmail.com" target="_blank" rel="noopener" class="no-decoration">👾</a>
+        <a href="https://github.com/umandathathsarani" target="_blank" rel="noopener" class="no-decoration">🐙</a>
+        <a href="https://linkedin.com/in/binuri-umanda-859bba337" target="_blank" rel="noopener" class="no-decoration">🐦</a>
+        <a href="https://www.instagram.com/b.uma.t" target="_blank" rel="noopener" class="no-decoration">📷</a>
     </div>
     <div class="footer-copyright">
         &copy; 2026 Wizard's Academy. All rights reserved.

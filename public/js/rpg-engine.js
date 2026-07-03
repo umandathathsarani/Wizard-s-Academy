@@ -52,6 +52,31 @@ const RPGEngine = {
         }
     },
     
+    logout: function() {
+        this.currentUser = null;
+        this.quests = [];
+        localStorage.removeItem('wizard_id');
+        this.updateUI();
+        navigateTo('view-home');
+        
+        // Show a brief notification
+        const banner = document.createElement('div');
+        banner.className = 'quest-notification';
+        banner.innerHTML = `
+            <div class="quest-notif-icon">👋</div>
+            <div class="quest-notif-text">
+                <h4>Logged Out</h4>
+                <p>You are now playing as a Guest.</p>
+            </div>
+        `;
+        document.body.appendChild(banner);
+        setTimeout(() => banner.classList.add('show'), 100);
+        setTimeout(() => {
+            banner.classList.remove('show');
+            setTimeout(() => banner.remove(), 500);
+        }, 3000);
+    },
+    
     loadItems: async function() {
         try {
             const response = await fetch('/api/items');
@@ -254,6 +279,37 @@ async function selectTrait(trait) {
     }
 }
 
+async function loginExistingUser() {
+    const name = document.getElementById('wizard-name').value.trim();
+    if (!name) return alert("Please enter your name to log in!");
+    
+    try {
+        const response = await fetch('/api/users/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: name })
+        });
+        const data = await response.json();
+        
+        if (data.success) {
+            RPGEngine.currentUser = data.user;
+            localStorage.setItem('wizard_id', RPGEngine.currentUser.id);
+            await RPGEngine.loadQuests();
+            RPGEngine.updateUI();
+            
+            // Navigate straight to profile since they already have a house
+            navigateTo('view-profile');
+            
+            // Notification
+            if (typeof clickAudio !== 'undefined' && clickAudio) clickAudio.play().catch(e=>{});
+        } else {
+            alert(data.error || "Failed to log in.");
+        }
+    } catch (e) {
+        alert("Network error.");
+    }
+}
+
 function finishSorting() {
     // Reset form for next time just in case
     document.getElementById('wizard-name').value = '';
@@ -339,7 +395,10 @@ function updateProfileView() {
                         </div>
                     </div>
                     <div style="text-align: right; min-width: 120px;">
-                        <div style="color: var(--accent-color); font-weight: bold; margin-bottom: 0.5rem;">+${quest.rewardXp} XP</div>
+                        <div style="color: var(--accent-color); font-weight: bold; margin-bottom: 0.5rem;">
+                            ${quest.rewardXp > 0 ? `+${quest.rewardXp} XP` : ''}
+                            ${quest.rewardCoins > 0 ? `+${quest.rewardCoins} Galleons` : ''}
+                        </div>
                         ${actionHtml}
                     </div>
                 </div>
@@ -430,6 +489,10 @@ RPGEngine.showQuestNotification = function(quest) {
         <div class="quest-notif-text">
             <h4>Quest Completed!</h4>
             <p>${quest.title}</p>
+            <div style="font-size: 0.8rem; margin-top: 0.3rem; color: #ffd700;">
+                ${quest.rewardXp > 0 ? `+${quest.rewardXp} XP` : ''}
+                ${quest.rewardCoins > 0 ? `+${quest.rewardCoins} Galleons` : ''}
+            </div>
         </div>
     `;
     document.body.appendChild(banner);
@@ -465,7 +528,12 @@ function updateShopView() {
         const isOwned = item.type !== 'potion' && user.inventory && user.inventory.includes(item.id);
         const isEquipped = user.equipped && (user.equipped.wand === item.id || user.equipped.pet === item.id);
         
-        let buttonHtml = `<button class="magical-btn item-action" onclick="handleBuyItem('${item.id}')">Buy (${item.price} 🪙)</button>`;
+        const isLevelLocked = item.requiredLevel && user.level < item.requiredLevel;
+        
+        let buttonHtml = `<button class="magical-btn item-action" onclick="handleBuyItem('${item.id}')" ${isLevelLocked ? 'disabled style="filter: grayscale(1); opacity: 0.5; cursor: not-allowed;"' : ''}>
+            ${isLevelLocked ? '🔒 Level ' + item.requiredLevel : 'Buy (' + item.price + ' 🪙)'}
+        </button>`;
+        
         if (isEquipped) {
             buttonHtml = `<button class="magical-btn btn-equipped item-action" onclick="handleEquipItem('${item.id}')">Equipped</button>`;
         } else if (isOwned) {
@@ -473,13 +541,13 @@ function updateShopView() {
         }
         
         const card = document.createElement('div');
-        card.className = 'shop-item';
+        card.className = `shop-item ${isLevelLocked ? 'locked-item' : ''}`;
         card.innerHTML = `
-            <div class="item-icon">${item.icon}</div>
-            <div class="item-name">${item.name}</div>
+            <div class="item-icon" ${isLevelLocked ? 'style="filter: grayscale(1); opacity: 0.5;"' : ''}>${item.icon}</div>
+            <div class="item-name" ${isLevelLocked ? 'style="color: #888;"' : ''}>${item.name}</div>
             <div class="item-type">${item.type}</div>
             <div class="item-desc">${item.description}</div>
-            ${!isOwned ? `<div class="item-price">${item.price} 🪙</div>` : ''}
+            ${!isOwned ? `<div class="item-price" ${isLevelLocked ? 'style="color: #888;"' : ''}>${item.price} 🪙</div>` : ''}
             ${buttonHtml}
         `;
         container.appendChild(card);

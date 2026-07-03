@@ -9,6 +9,10 @@
         <label for="wizard-name">What is your name?</label>
         <input type="text" id="wizard-name" class="magical-input" placeholder="e.g. Harry Potter" autocomplete="off">
         <button class="magical-btn" onclick="startSorting()">WEAR THE HAT</button>
+        <div style="margin-top: 1rem;">
+            <p style="font-size: 0.9rem; margin-bottom: 0.5rem; color: #ccc;">Already have an account?</p>
+            <button class="magical-btn-small" onclick="loginExistingUser()">LOG IN</button>
+        </div>
     </div>
     
     <div id="sorting-step-2" class="sorting-step" style="display:none;">
