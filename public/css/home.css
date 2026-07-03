@@ -164,3 +164,36 @@
     padding: 0.75rem 1.5rem;
     font-size: 0.9rem;
 }
+
+/* Home Media Queries */
+@media (max-width: 1024px) {
+    .three-column-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        align-items: center;
+    }
+    .glow-text {
+        font-size: 4rem;
+        letter-spacing: 6px;
+    }
+    .side-panel {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .glow-text {
+        font-size: 3rem;
+        letter-spacing: 4px;
+    }
+    .menu-buttons {
+        width: 100%;
+        max-width: 320px;
+    }
+    .view-title {
+        font-size: 2rem;
+        margin-top: 3rem;
+    }
+}

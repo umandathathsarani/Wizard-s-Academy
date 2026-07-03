@@ -77,3 +77,16 @@
     0% { transform: scaleY(1); opacity: 0.8; }
     100% { transform: scaleY(1.1); opacity: 1; }
 }
+
+@media (max-width: 768px) {
+    .sequence-display {
+        font-size: 2rem;
+    }
+    .ingredient-grid {
+        gap: 1rem;
+    }
+    .ingredient-btn {
+        font-size: 2rem;
+        padding: 0.5rem;
+    }
+}

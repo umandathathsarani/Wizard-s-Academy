@@ -74,3 +74,20 @@
     color: #f87171; /* Error red */
     text-shadow: 0 0 10px #f87171;
 }
+
+@media (max-width: 768px) {
+    .spell-target {
+        font-size: 2rem;
+    }
+    .magical-input {
+        width: 100%;
+        font-size: 1.2rem;
+        padding: 0.8rem;
+    }
+    .game-arena {
+        padding: 2rem 1rem;
+    }
+    .game-header {
+        font-size: 1.2rem;
+    }
+}
