@@ -1,0 +1,39 @@
+<div class="library-container gs-reveal">
+    <button class="btn-back magical-btn-small" onclick="navigateTo('view-map')">⟵ BACK TO MAP</button>
+    
+    <div class="library-header">
+        <h2 class="glow-text">The Hogwarts Library</h2>
+        <p>Explore the magical compendium of Spells and Potions.</p>
+    </div>
+    
+    <div class="library-controls">
+        <input type="text" id="library-search" placeholder="Search by name, incantation, or effect..." onkeyup="Library.filter()">
+        <div class="library-tabs">
+            <button class="lib-tab active" onclick="Library.setFilter('all')">All</button>
+            <button class="lib-tab" onclick="Library.setFilter('spells')">Spells</button>
+            <button class="lib-tab" onclick="Library.setFilter('potions')">Potions</button>
+            <button class="lib-tab tab-dark" onclick="Library.setFilter('dark')">Dark Arts</button>
+        </div>
+    </div>
+    
+    <div class="spellbook">
+        <div class="spellbook-page left-page">
+            <div class="page-content" id="library-page-left">
+                <!-- Left page content injected here -->
+            </div>
+            <div class="page-number" id="page-num-left">1</div>
+        </div>
+        <div class="spellbook-binding"></div>
+        <div class="spellbook-page right-page">
+            <div class="page-content" id="library-page-right">
+                <!-- Right page content injected here -->
+            </div>
+            <div class="page-number" id="page-num-right">2</div>
+        </div>
+    </div>
+    
+    <div class="library-pagination">
+        <button class="magical-btn-small" id="lib-prev-btn" onclick="Library.prevPage()">⟵ Previous Pages</button>
+        <button class="magical-btn-small" id="lib-next-btn" onclick="Library.nextPage()">Next Pages ⟶</button>
+    </div>
+</div>

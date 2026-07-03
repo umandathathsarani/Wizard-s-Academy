@@ -293,6 +293,26 @@ app.get('/api/users/:id/quests', (req, res) => {
     });
 });
 
+const spellsPath = path.join(__dirname, 'data', 'spells.json');
+const potionsPath = path.join(__dirname, 'data', 'potions.json');
+
+app.get('/api/library', (req, res) => {
+    fs.readFile(spellsPath, 'utf8', (err, spellData) => {
+        if (err) return res.status(500).json({ error: 'Failed to load spells' });
+        
+        fs.readFile(potionsPath, 'utf8', (err2, potionData) => {
+            if (err2) return res.status(500).json({ error: 'Failed to load potions' });
+            
+            let spells = [];
+            let potions = [];
+            try { spells = JSON.parse(spellData); } catch(e) {}
+            try { potions = JSON.parse(potionData); } catch(e) {}
+            
+            res.json({ success: true, spells, potions });
+        });
+    });
+});
+
 // Serve index.html for the root route
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));

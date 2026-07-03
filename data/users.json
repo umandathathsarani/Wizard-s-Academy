@@ -20,6 +20,24 @@
         "equipped": {
             "wand": null,
             "pet": null
-        }
+        },
+        "activeQuests": [
+            {
+                "id": "score_memory_100",
+                "progress": 0,
+                "claimed": false
+            },
+            {
+                "id": "score_spell_100",
+                "progress": 0,
+                "claimed": false
+            },
+            {
+                "id": "score_potion_100",
+                "progress": 0,
+                "claimed": false
+            }
+        ],
+        "lastQuestReset": 1783076255704
     }
 ]

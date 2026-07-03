@@ -1,0 +1,154 @@
+[
+    {
+        "id": "s1",
+        "name": "Accio",
+        "incantation": "Accio",
+        "type": "Charm",
+        "effect": "Summons an object towards the caster.",
+        "isDarkMagic": false
+    },
+    {
+        "id": "s2",
+        "name": "Aguamenti",
+        "incantation": "Aguamenti",
+        "type": "Charm",
+        "effect": "Produces a jet of water from the caster's wand.",
+        "isDarkMagic": false
+    },
+    {
+        "id": "s3",
+        "name": "Alohomora",
+        "incantation": "Alohomora",
+        "type": "Charm",
+        "effect": "Unlocks doors and other locked objects.",
+        "isDarkMagic": false
+    },
+    {
+        "id": "s4",
+        "name": "Avada Kedavra",
+        "incantation": "Avada Kedavra",
+        "type": "Curse",
+        "effect": "Causes instant death to the victim. One of the three Unforgivable Curses.",
+        "isDarkMagic": true
+    },
+    {
+        "id": "s5",
+        "name": "Crucio",
+        "incantation": "Crucio",
+        "type": "Curse",
+        "effect": "Inflicts excruciating pain on the victim. One of the three Unforgivable Curses.",
+        "isDarkMagic": true
+    },
+    {
+        "id": "s6",
+        "name": "Expecto Patronum",
+        "incantation": "Expecto Patronum",
+        "type": "Charm",
+        "effect": "Conjures a Patronus, a silvery phantom shape, usually an animal, which is the embodiment of the positive thoughts of the caster. Used to drive away Dementors.",
+        "isDarkMagic": false
+    },
+    {
+        "id": "s7",
+        "name": "Expelliarmus",
+        "incantation": "Expelliarmus",
+        "type": "Charm",
+        "effect": "Disarms your opponent.",
+        "isDarkMagic": false
+    },
+    {
+        "id": "s8",
+        "name": "Fiendfyre",
+        "incantation": "Unknown",
+        "type": "Curse",
+        "effect": "Conjures destructive, enchanted fire that mutates into monsters.",
+        "isDarkMagic": true
+    },
+    {
+        "id": "s9",
+        "name": "Imperio",
+        "incantation": "Imperio",
+        "type": "Curse",
+        "effect": "Places the victim completely under the caster's control. One of the three Unforgivable Curses.",
+        "isDarkMagic": true
+    },
+    {
+        "id": "s10",
+        "name": "Incendio",
+        "incantation": "Incendio",
+        "type": "Charm",
+        "effect": "Produces fire.",
+        "isDarkMagic": false
+    },
+    {
+        "id": "s11",
+        "name": "Lumos",
+        "incantation": "Lumos",
+        "type": "Charm",
+        "effect": "Creates a narrow beam of light that shines from the wand's tip.",
+        "isDarkMagic": false
+    },
+    {
+        "id": "s12",
+        "name": "Morsmordre",
+        "incantation": "Morsmordre",
+        "type": "Curse",
+        "effect": "Conjures the Dark Mark in the sky.",
+        "isDarkMagic": true
+    },
+    {
+        "id": "s13",
+        "name": "Nox",
+        "incantation": "Nox",
+        "type": "Charm",
+        "effect": "Turns off the light produced by Lumos.",
+        "isDarkMagic": false
+    },
+    {
+        "id": "s14",
+        "name": "Obliviate",
+        "incantation": "Obliviate",
+        "type": "Charm",
+        "effect": "Erases specific memories.",
+        "isDarkMagic": false
+    },
+    {
+        "id": "s15",
+        "name": "Petrificus Totalus",
+        "incantation": "Petrificus Totalus",
+        "type": "Curse",
+        "effect": "Used to temporarily bind the victim's body in a position much like that of a soldier at attention.",
+        "isDarkMagic": false
+    },
+    {
+        "id": "s16",
+        "name": "Protego",
+        "incantation": "Protego",
+        "type": "Charm",
+        "effect": "The Shield Charm causes minor to strong jinxes, curses, and hexes to rebound upon the attacker.",
+        "isDarkMagic": false
+    },
+    {
+        "id": "s17",
+        "name": "Sectumsempra",
+        "incantation": "Sectumsempra",
+        "type": "Curse",
+        "effect": "Violently wounds the target; described as being as though the subject had been slashed by a sword.",
+        "isDarkMagic": true
+    },
+    {
+        "id": "s18",
+        "name": "Stupefy",
+        "incantation": "Stupefy",
+        "type": "Charm",
+        "effect": "Stuns the victim.",
+        "isDarkMagic": false
+    },
+    {
+        "id": "s19",
+        "name": "Wingardium Leviosa",
+        "incantation": "Wingardium Leviosa",
+        "type": "Charm",
+        "effect": "Levitates objects.",
+        "isDarkMagic": false
+    }
+]

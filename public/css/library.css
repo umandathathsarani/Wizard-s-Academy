@@ -1,0 +1,219 @@
+/* library.css */
+.library-container {
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.library-header {
+    margin-bottom: 2rem;
+}
+
+.library-controls {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+#library-search {
+    width: 100%;
+    max-width: 500px;
+    padding: 0.8rem 1rem;
+    border-radius: 20px;
+    border: 1px solid var(--accent-dark);
+    background: rgba(0,0,0,0.5);
+    color: var(--text-light);
+    font-family: var(--font-body);
+}
+
+.library-tabs {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.lib-tab {
+    background: rgba(20,20,30,0.8);
+    border: 1px solid var(--accent-dark);
+    color: var(--text-light);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    transition: all 0.3s ease;
+}
+
+.lib-tab:hover, .lib-tab.active {
+    background: var(--accent-dark);
+    color: var(--primary-dark);
+}
+
+.lib-tab.tab-dark {
+    border-color: #00ff00;
+    color: #00ff00;
+}
+
+.lib-tab.tab-dark:hover, .lib-tab.tab-dark.active {
+    background: rgba(0,255,0,0.2);
+    box-shadow: 0 0 10px rgba(0,255,0,0.5);
+}
+
+/* Spellbook Layout */
+.spellbook {
+    display: flex;
+    justify-content: center;
+    perspective: 1500px;
+    margin: 0 auto 2rem;
+    max-width: 900px;
+    height: 550px;
+    position: relative;
+    background: url('https://www.transparenttextures.com/patterns/aged-paper.png'), #f4e8c1;
+    border-radius: 10px;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.5), 0 20px 50px rgba(0,0,0,0.8);
+    border: 5px solid #3e2723;
+    overflow: hidden;
+}
+
+.spellbook-binding {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    transform: translateX(-50%);
+    background: linear-gradient(to right, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.3) 100%);
+    z-index: 10;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+.spellbook-page {
+    width: 50%;
+    height: 100%;
+    padding: 2rem 3rem;
+    position: relative;
+    color: #3e2723; /* Dark brown text for parchment */
+    font-family: var(--font-body);
+    text-align: left;
+    overflow-y: auto;
+}
+
+.spellbook-page::-webkit-scrollbar {
+    width: 6px;
+}
+.spellbook-page::-webkit-scrollbar-thumb {
+    background: rgba(62, 39, 35, 0.5);
+    border-radius: 3px;
+}
+
+.left-page {
+    border-right: 1px solid rgba(0,0,0,0.2);
+    box-shadow: inset -10px 0 20px rgba(0,0,0,0.1);
+}
+
+.right-page {
+    border-left: 1px solid rgba(0,0,0,0.2);
+    box-shadow: inset 10px 0 20px rgba(0,0,0,0.1);
+}
+
+.page-number {
+    position: absolute;
+    bottom: 15px;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: rgba(62, 39, 35, 0.6);
+}
+
+#page-num-left { left: 20px; }
+#page-num-right { right: 20px; }
+
+/* Entry Styles */
+.lib-entry {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed rgba(62, 39, 35, 0.3);
+}
+
+.lib-entry:last-child {
+    border-bottom: none;
+}
+
+.lib-title {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: #5d4037;
+    margin-bottom: 0.3rem;
+}
+
+.lib-meta {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: #795548;
+    margin-bottom: 0.5rem;
+}
+
+.lib-incantation {
+    font-family: monospace;
+    background: rgba(62, 39, 35, 0.1);
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.lib-effect {
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* Dark Magic Styles */
+.lib-entry.dark-magic {
+    position: relative;
+    color: #1a1a1a;
+}
+
+.lib-entry.dark-magic .lib-title {
+    color: #004d00;
+    text-shadow: 0 0 5px rgba(0,255,0,0.3);
+}
+
+.lib-entry.dark-magic::before {
+    content: '☠️ Restricted';
+    display: inline-block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    background: #003300;
+    color: #00ff00;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+.library-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .spellbook {
+        flex-direction: column;
+        height: 700px;
+    }
+    .spellbook-page {
+        width: 100%;
+        height: 50%;
+        padding: 1.5rem;
+    }
+    .spellbook-binding {
+        width: 100%;
+        height: 10px;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.3) 100%);
+    }
+}

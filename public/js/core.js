@@ -22,7 +22,7 @@ async function loadViews() {
         'potion-mixing', 'memory-cards', 
         'house-quiz', 'flying-challenge',
         'leaderboard', 'about', 'settings',
-        'sorting-ceremony', 'profile', 'diagon-alley'
+        'sorting-ceremony', 'profile', 'diagon-alley', 'library'
     ];
     
     for (const view of views) {

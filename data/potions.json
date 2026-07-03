@@ -1,0 +1,82 @@
+[
+    {
+        "id": "p1",
+        "name": "Amortentia",
+        "type": "Love Potion",
+        "effect": "The most powerful love potion in the world. It causes a powerful infatuation or obsession from the drinker.",
+        "ingredients": ["Ashwinder eggs", "Rose thorns", "Peppermint", "Moonstone"],
+        "isDarkMagic": false
+    },
+    {
+        "id": "p2",
+        "name": "Draught of Living Death",
+        "type": "Sleeping Potion",
+        "effect": "A powerful sleeping draught that brings on a sleep so deep it mimics death.",
+        "ingredients": ["Asphodel", "Infusion of Wormwood", "Valerian roots", "Sopophorous bean"],
+        "isDarkMagic": true
+    },
+    {
+        "id": "p3",
+        "name": "Felix Felicis",
+        "type": "Luck Potion",
+        "effect": "Also known as 'Liquid Luck', it makes the drinker lucky for a period of time, during which everything they attempt will be successful.",
+        "ingredients": ["Ashwinder egg", "Squill bulb", "Murtlap tentacle", "Tincture of thyme", "Occamy eggshell", "Powdered rue"],
+        "isDarkMagic": false
+    },
+    {
+        "id": "p4",
+        "name": "Polyjuice Potion",
+        "type": "Transformation Potion",
+        "effect": "Allows the drinker to assume the form of someone else.",
+        "ingredients": ["Lacewing flies", "Leeches", "Powdered bicorn horn", "Knotgrass", "Fluxweed", "Shredded Boomslang skin", "A piece of the person you want to turn into"],
+        "isDarkMagic": false
+    },
+    {
+        "id": "p5",
+        "name": "Veritaserum",
+        "type": "Truth Potion",
+        "effect": "A powerful truth serum. The drinker is forced to answer any questions put to them truthfully.",
+        "ingredients": ["Ptolemy", "Powdered Moonstone", "Adder's fork", "Jobberknoll feathers"],
+        "isDarkMagic": false
+    },
+    {
+        "id": "p6",
+        "name": "Skele-Gro",
+        "type": "Healing Potion",
+        "effect": "Regrows missing bones. The process is famously slow and painful.",
+        "ingredients": ["Chinese Chomping Cabbage", "Puffer-fish", "Scarab beetles"],
+        "isDarkMagic": false
+    },
+    {
+        "id": "p7",
+        "name": "Drink of Despair",
+        "type": "Poison",
+        "effect": "Induces terrible pain, horrifying visions, and extreme thirst. Used by Voldemort to protect his Horcrux.",
+        "ingredients": ["Unknown dark ingredients"],
+        "isDarkMagic": true
+    },
+    {
+        "id": "p8",
+        "name": "Wolfsbane Potion",
+        "type": "Healing/Control Potion",
+        "effect": "Allows a werewolf to keep their human mind during transformation.",
+        "ingredients": ["Aconite (Wolfsbane)", "Unknown others"],
+        "isDarkMagic": false
+    },
+    {
+        "id": "p9",
+        "name": "Pepperup Potion",
+        "type": "Healing Potion",
+        "effect": "Cures the common cold and warms the drinker up, causing smoke to steam from their ears.",
+        "ingredients": ["Mandrake", "Bicorn Horn"],
+        "isDarkMagic": false
+    },
+    {
+        "id": "p10",
+        "name": "Elixir of Life",
+        "type": "Immortality Potion",
+        "effect": "Extends life infinitely, so long as it is consumed regularly.",
+        "ingredients": ["Philosopher's Stone"],
+        "isDarkMagic": false
+    }
+]
