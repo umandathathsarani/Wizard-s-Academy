@@ -144,6 +144,8 @@ app.put('/api/users/:id', (req, res) => {
             if (level !== undefined) users[userIndex].level = level;
             if (req.body.inventory) users[userIndex].inventory = req.body.inventory;
             if (req.body.equipped) users[userIndex].equipped = req.body.equipped;
+            if (req.body.activeQuests) users[userIndex].activeQuests = req.body.activeQuests;
+            if (req.body.lastQuestReset !== undefined) users[userIndex].lastQuestReset = req.body.lastQuestReset;
             
             writeUsers(users, (err) => {
                 if (err) return res.status(500).json({ error: 'Failed to update user' });
@@ -240,6 +242,53 @@ app.post('/api/users/:id/equip', (req, res) => {
                 if (err) return res.status(500).json({ error: 'Failed to update user' });
                 res.json({ success: true, user });
             });
+        });
+    });
+});
+
+const questsPath = path.join(__dirname, 'data', 'quests.json');
+
+// Get/Reset user quests
+app.get('/api/users/:id/quests', (req, res) => {
+    readUsers((users) => {
+        const userIndex = users.findIndex(u => u.id === req.params.id);
+        if (userIndex === -1) return res.status(404).json({ error: 'User not found' });
+        
+        const user = users[userIndex];
+        const now = Date.now();
+        const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000;
+        
+        fs.readFile(questsPath, 'utf8', (err, questData) => {
+            if (err) return res.status(500).json({ error: 'Failed to load quests catalog' });
+            
+            let allQuests = [];
+            try { allQuests = JSON.parse(questData); } catch(e) {}
+            
+            // Check if we need to assign new quests
+            if (!user.lastQuestReset || (now - user.lastQuestReset) > TWENTY_FOUR_HOURS) {
+                // Shuffle and pick 3 quests
+                const shuffled = allQuests.sort(() => 0.5 - Math.random());
+                const selected = shuffled.slice(0, 3);
+                
+                user.activeQuests = selected.map(q => ({
+                    id: q.id,
+                    progress: 0,
+                    claimed: false
+                }));
+                user.lastQuestReset = now;
+                
+                writeUsers(users, () => {
+                    // Ignore write error for now, continue to return data
+                });
+            }
+            
+            // Map active quests to full details
+            const activeQuestsDetails = (user.activeQuests || []).map(aq => {
+                const catalogQuest = allQuests.find(q => q.id === aq.id) || {};
+                return { ...catalogQuest, ...aq };
+            });
+            
+            res.json({ success: true, quests: activeQuestsDetails, nextReset: user.lastQuestReset + TWENTY_FOUR_HOURS });
         });
     });
 });

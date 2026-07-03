@@ -24,12 +24,12 @@
     </div>
     
     <div class="profile-tabs">
-        <button class="tab-btn active">Overview</button>
+        <button class="tab-btn active" id="tab-overview" onclick="switchProfileTab('overview')">Overview</button>
         <button class="tab-btn" onclick="navigateTo('view-diagon-alley')">Inventory (Shop)</button>
-        <button class="tab-btn" style="opacity:0.5; cursor:not-allowed;" title="Coming in Phase 14">Quests</button>
+        <button class="tab-btn" id="tab-quests" onclick="switchProfileTab('quests')">Daily Quests</button>
     </div>
     
-    <div class="profile-content">
+    <div class="profile-content" id="profile-content-overview">
         <p class="placeholder-text">Play mini-games to earn XP and Galleons!</p>
         <div style="margin: 1.5rem 0;">
             <h3 style="color:var(--accent-color); font-family:var(--font-heading); margin-bottom: 0.5rem;">Equipped Wand</h3>
@@ -38,5 +38,13 @@
             </div>
         </div>
         <button class="magical-btn" onclick="navigateTo('view-games')">PLAY GAMES</button>
+    </div>
+    
+    <div class="profile-content" id="profile-content-quests" style="display: none;">
+        <h3 style="color:var(--accent-color); font-family:var(--font-heading); margin-bottom: 1rem; text-align: center;">Daily Quests</h3>
+        <p style="color:#aaa; margin-bottom: 2rem;">Complete quests to earn Galleons and XP! Quests reset daily.</p>
+        <div id="quests-container" style="display: flex; flex-direction: column; gap: 1.5rem; text-align: left;">
+            <!-- Quests injected here -->
+        </div>
     </div>
 </div>

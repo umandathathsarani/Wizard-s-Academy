@@ -372,6 +372,8 @@ function showNamePrompt(gameId, score, callback) {
             if (typeof RPGEngine !== 'undefined' && RPGEngine.currentUser) {
                 await RPGEngine.addXP(50);
                 await RPGEngine.addCoins(20);
+                await RPGEngine.updateQuestProgress('play_game', 1);
+                await RPGEngine.updateQuestProgress('score_' + gameId, score);
             }
         } catch(e) {
             console.error(e);

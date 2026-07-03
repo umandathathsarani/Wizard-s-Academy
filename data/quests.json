@@ -1,0 +1,47 @@
+[
+    {
+        "id": "play_any_3",
+        "title": "Dedicated Student",
+        "description": "Play 3 mini-games of any kind.",
+        "actionType": "play_game",
+        "targetValue": 3,
+        "rewardXp": 100,
+        "rewardCoins": 20
+    },
+    {
+        "id": "score_spell_100",
+        "title": "Charms Practice",
+        "description": "Earn a total of 100 points in Spell Casting.",
+        "actionType": "score_spell-casting",
+        "targetValue": 100,
+        "rewardXp": 100,
+        "rewardCoins": 30
+    },
+    {
+        "id": "score_potion_100",
+        "title": "Brewing Mastery",
+        "description": "Earn a total of 100 points in Potion Mixing.",
+        "actionType": "score_potion-mixing",
+        "targetValue": 100,
+        "rewardXp": 100,
+        "rewardCoins": 30
+    },
+    {
+        "id": "score_memory_100",
+        "title": "Sharp Mind",
+        "description": "Earn a total of 100 points in Memory Cards.",
+        "actionType": "score_memory-cards",
+        "targetValue": 100,
+        "rewardXp": 100,
+        "rewardCoins": 30
+    },
+    {
+        "id": "buy_item",
+        "title": "Window Shopper",
+        "description": "Visit Diagon Alley and buy an item or potion.",
+        "actionType": "buy_item",
+        "targetValue": 1,
+        "rewardXp": 100,
+        "rewardCoins": 0
+    }
+]

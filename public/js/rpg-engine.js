@@ -2,6 +2,7 @@
 const RPGEngine = {
     currentUser: null,
     itemsCatalog: [],
+    quests: [], // Currently active quests for the user
     
     init: async function() {
         await this.loadItems();
@@ -25,6 +26,7 @@ const RPGEngine = {
             if (data.success) {
                 this.currentUser = data.user;
                 localStorage.setItem('wizard_id', this.currentUser.id);
+                await this.loadQuests();
                 this.updateUI();
                 return true;
             }
@@ -40,6 +42,7 @@ const RPGEngine = {
             const data = await response.json();
             if (data.success) {
                 this.currentUser = data.user;
+                await this.loadQuests();
                 this.updateUI();
             } else {
                 localStorage.removeItem('wizard_id');
@@ -145,7 +148,8 @@ const RPGEngine = {
                 body: JSON.stringify({
                     xp: this.currentUser.xp,
                     coins: this.currentUser.coins,
-                    level: this.currentUser.level
+                    level: this.currentUser.level,
+                    activeQuests: this.currentUser.activeQuests
                 })
             });
             this.updateUI();
@@ -307,7 +311,141 @@ function updateProfileView() {
     
     const percent = Math.min(100, Math.floor((user.xp / xpNeeded) * 100));
     document.getElementById('profile-xp-bar').style.width = `${percent}%`;
+    
+    // Render Quests
+    const questsContainer = document.getElementById('quests-container');
+    if (questsContainer && RPGEngine.quests) {
+        questsContainer.innerHTML = '';
+        RPGEngine.quests.forEach(quest => {
+            const percentComplete = Math.min(100, Math.floor((quest.progress / quest.targetValue) * 100));
+            const isCompleted = quest.progress >= quest.targetValue;
+            
+            let actionHtml = '';
+            if (quest.claimed) {
+                actionHtml = `<button class="magical-btn btn-equipped" disabled style="padding: 0.5rem 1rem; font-size: 0.9rem;">Claimed</button>`;
+            } else if (isCompleted) {
+                actionHtml = `<button class="magical-btn" onclick="RPGEngine.claimQuest('${quest.id}')" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Claim Reward</button>`;
+            } else {
+                actionHtml = `<div style="font-size: 0.9rem; color: #ccc;">${quest.progress} / ${quest.targetValue}</div>`;
+            }
+            
+            questsContainer.innerHTML += `
+                <div style="background: rgba(20,20,30,0.8); border: 1px solid rgba(212,175,55,0.3); border-radius: 10px; padding: 1rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                    <div style="flex-grow: 1;">
+                        <h4 style="color: var(--accent-light); margin-bottom: 0.5rem;">${quest.title}</h4>
+                        <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 0.5rem;">${quest.description}</p>
+                        <div class="xp-bar-container" style="height: 10px; margin-bottom: 0;">
+                            <div class="xp-bar" style="width: ${percentComplete}%; background: ${isCompleted ? 'var(--accent-color)' : ''}"></div>
+                        </div>
+                    </div>
+                    <div style="text-align: right; min-width: 120px;">
+                        <div style="color: var(--accent-color); font-weight: bold; margin-bottom: 0.5rem;">+${quest.rewardXp} XP</div>
+                        ${actionHtml}
+                    </div>
+                </div>
+            `;
+        });
+    }
 }
+
+window.switchProfileTab = function(tab) {
+    document.getElementById('profile-content-overview').style.display = 'none';
+    document.getElementById('profile-content-quests').style.display = 'none';
+    
+    document.getElementById('tab-overview').classList.remove('active');
+    document.getElementById('tab-quests').classList.remove('active');
+    
+    document.getElementById(`profile-content-${tab}`).style.display = 'block';
+    document.getElementById(`tab-${tab}`).classList.add('active');
+};
+
+// --- Quests System ---
+RPGEngine.loadQuests = async function() {
+    if (!this.currentUser) return;
+    try {
+        const response = await fetch(`/api/users/${this.currentUser.id}/quests`);
+        const data = await response.json();
+        if (data.success) {
+            this.quests = data.quests;
+            this.currentUser.activeQuests = this.quests.map(q => ({
+                id: q.id, progress: q.progress, claimed: q.claimed
+            }));
+        }
+    } catch (e) {
+        console.error('Failed to load quests:', e);
+    }
+};
+
+RPGEngine.updateQuestProgress = async function(actionType, value) {
+    if (!this.currentUser || !this.quests) return;
+    
+    let updated = false;
+    for (let quest of this.quests) {
+        if (quest.actionType === actionType && !quest.claimed && quest.progress < quest.targetValue) {
+            quest.progress += value;
+            if (quest.progress >= quest.targetValue) {
+                quest.progress = quest.targetValue;
+                this.showQuestNotification(quest);
+            }
+            
+            // Also update the currentUser object
+            const uq = this.currentUser.activeQuests.find(q => q.id === quest.id);
+            if (uq) uq.progress = quest.progress;
+            updated = true;
+        }
+    }
+    
+    if (updated) {
+        await this.syncWithServer();
+        // Try updating profile view if we are on it
+        const currentView = document.querySelector('.view.active');
+        if (currentView && currentView.id === 'view-profile') {
+            updateProfileView();
+        }
+    }
+};
+
+RPGEngine.claimQuest = async function(questId) {
+    const quest = this.quests.find(q => q.id === questId);
+    if (!quest || quest.claimed || quest.progress < quest.targetValue) return;
+    
+    quest.claimed = true;
+    const uq = this.currentUser.activeQuests.find(q => q.id === questId);
+    if (uq) uq.claimed = true;
+    
+    await this.addXP(quest.rewardXp);
+    if (quest.rewardCoins > 0) {
+        await this.addCoins(quest.rewardCoins);
+    }
+    
+    await this.syncWithServer();
+    updateProfileView();
+};
+
+RPGEngine.showQuestNotification = function(quest) {
+    const banner = document.createElement('div');
+    banner.className = 'quest-notification';
+    banner.innerHTML = `
+        <div class="quest-notif-icon">⭐</div>
+        <div class="quest-notif-text">
+            <h4>Quest Completed!</h4>
+            <p>${quest.title}</p>
+        </div>
+    `;
+    document.body.appendChild(banner);
+    
+    setTimeout(() => banner.classList.add('show'), 100);
+    
+    if (typeof clickAudio !== 'undefined' && clickAudio) {
+        clickAudio.currentTime = 0;
+        clickAudio.play().catch(e => {});
+    }
+    
+    setTimeout(() => {
+        banner.classList.remove('show');
+        setTimeout(() => banner.remove(), 500);
+    }, 4000);
+};
 
 // --- Shop View Functions ---
 function updateShopView() {
@@ -355,6 +493,7 @@ async function handleBuyItem(itemId) {
     
     const result = await RPGEngine.buyItem(itemId);
     if (result.success) {
+        await RPGEngine.updateQuestProgress('buy_item', 1);
         // Potions apply instantly
         const item = RPGEngine.itemsCatalog.find(i => i.id === itemId);
         if (item && item.type === 'potion') {
