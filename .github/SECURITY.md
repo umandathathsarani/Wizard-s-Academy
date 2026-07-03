@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are currently being supported with security updates.
+The following versions of **Wizard's Academy** are currently being supported with security updates.
 
 | Version | Supported          |
 | ------- | ------------------ |
@@ -13,4 +13,4 @@ Use this section to tell people about which versions of your project are current
 
 Please do not report security vulnerabilities through public GitHub issues.
 
-Instead, please report them to me directly by emailing umathathsarani@gmail.com. I will aim to respond as quickly as possible and will keep you informed of our progress towards a fix and announcement.
+Instead, please report them directly to the creator by emailing umathathsarani@gmail.com. I will aim to respond as quickly as possible and will keep you informed of our progress towards a fix and announcement.
