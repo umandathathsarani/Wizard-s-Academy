@@ -6,28 +6,93 @@
     <title>Wizard's Academy</title>
     <meta name="description" content="A magical web application with mini-games">
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-logo">🪄</div>
+        <div class="preloader-text">Loading Magic...</div>
+    </div>
+
+    <!-- Audio Assets -->
+    <audio id="audio-ambient" loop>
+        <source src="sounds/ambient.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio-hover">
+        <source src="sounds/hover.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio-click">
+        <source src="sounds/click.mp3" type="audio/mpeg">
+    </audio>
+
     <div id="magic-cursor">🪄</div>
+    
+    <!-- Parallax Background Layers -->
+    <div id="parallax-container">
+        <div class="parallax-layer layer-bg" data-depth="0.05"></div>
+        <div class="parallax-layer layer-stars" data-depth="0.1" id="stars-container"></div>
+        <div class="parallax-layer layer-castle" data-depth="0.15"></div>
+        <div class="parallax-layer layer-fog layer-fog-back" data-depth="0.25"></div>
+        <div class="parallax-layer layer-candles" data-depth="0.4" id="candles-container"></div>
+        <div class="parallax-layer layer-fog layer-fog-front" data-depth="0.5"></div>
+        
+        <!-- Wizard Silhouette -->
+        <div class="parallax-layer layer-wizard" data-depth="0.6">
+            <svg class="wizard-silhouette" viewBox="0 0 100 200" fill="#020305" xmlns="http://www.w3.org/2000/svg">
+                <path d="M45,20 C45,10 55,10 55,20 L60,40 L40,40 Z" /> <!-- Hat -->
+                <circle cx="50" cy="45" r="8" /> <!-- Head -->
+                <path d="M30,60 Q50,50 70,60 L85,150 L15,150 Z" /> <!-- Cloak -->
+                <path d="M80,80 L95,60 L97,62 L82,82 Z" /> <!-- Wand arm -->
+            </svg>
+        </div>
+        
+        <div class="parallax-layer layer-vignette" data-depth="0"></div>
+    </div>
+    
     <div id="sparkle-container"></div>
-    <div id="fog-container"></div>
-    <div id="stars-container"></div>
-    <div id="candles-container"></div>
     
     <div class="app-container">
         <!-- Home View -->
         <div id="view-home" class="view active">
+            <nav class="top-nav gs-reveal">
+                <div class="nav-logo">🪄</div>
+                <div class="nav-links">
+                    <span onclick="navigateTo('view-home')">Home</span>
+                    <span onclick="navigateTo('view-games')">Games</span>
+                    <span onclick="navigateTo('view-leaderboard')">Leaderboard</span>
+                    <span onclick="navigateTo('view-about')">About</span>
+                </div>
+            </nav>
+
             <header class="hero">
-                <h1 class="glow-text">Wizard's Academy</h1>
-                <p class="subtitle">Magic begins with curiosity.</p>
+                <h1 class="glow-text gs-reveal gs-title">WIZARD'S<br>ACADEMY</h1>
+                <p class="subtitle gs-reveal gs-subtitle">
+                    Welcome to the greatest school of magic.<br>
+                    Master ancient spells, discover hidden secrets,<br>
+                    and become the next Grand Wizard.
+                </p>
             </header>
+            
+            <div class="divider gs-reveal gs-divider">
+                <span></span> ENTER THE CASTLE <span></span>
+            </div>
+
             <main>
                 <div class="menu-buttons">
-                    <button class="magical-btn" onclick="navigateTo('view-games')">Play Games</button>
-                    <button class="magical-btn" onclick="navigateTo('view-leaderboard')">Leaderboard</button>
-                    <button class="magical-btn" onclick="navigateTo('view-about')">About</button>
-                    <button class="magical-btn" onclick="navigateTo('view-settings')">Settings</button>
+                    <button class="magical-btn gs-reveal gs-btn" onclick="navigateTo('view-games')">
+                        <span class="btn-icon">⚡</span> Play Games
+                    </button>
+                    <button class="magical-btn gs-reveal gs-btn" onclick="navigateTo('view-leaderboard')">
+                        <span class="btn-icon">🏆</span> Leaderboard
+                    </button>
+                    <button class="magical-btn gs-reveal gs-btn" onclick="navigateTo('view-about')">
+                        <span class="btn-icon">📖</span> About
+                    </button>
+                    <button class="magical-btn gs-reveal gs-btn" onclick="navigateTo('view-settings')">
+                        <span class="btn-icon">⚙</span> Settings
+                    </button>
                 </div>
             </main>
         </div>
