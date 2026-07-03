@@ -1,0 +1,25 @@
+<div class="game-container gs-reveal">
+    <button class="btn-back magical-btn-small" onclick="navigateTo('view-games')">⟵ BACK TO MAP</button>
+    
+    <div class="game-header">
+        <h2 class="glow-text">Care of Magical Creatures</h2>
+        <p id="creature-status-text">A Hippogriff is resting in the paddock. You must bow to earn its trust before you can interact with it.</p>
+    </div>
+    
+    <div class="creature-paddock">
+        <div id="hippogriff" class="hippogriff">🦅</div>
+        
+        <div class="trust-bar-container">
+            <div class="trust-label">Hippogriff Trust</div>
+            <div class="trust-bar-bg">
+                <div id="trust-bar-fill" class="trust-bar-fill"></div>
+            </div>
+        </div>
+        
+        <div class="creature-actions">
+            <button id="btn-bow" class="magical-btn" onclick="CreaturesGame.bow()">Bow Slowly</button>
+            <button id="btn-pet" class="magical-btn" onclick="CreaturesGame.pet()" disabled>Pet</button>
+            <button id="btn-feed" class="magical-btn" onclick="CreaturesGame.feed()" disabled>Feed Ferret</button>
+        </div>
+    </div>
+</div>

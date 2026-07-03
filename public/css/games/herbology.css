@@ -1,0 +1,96 @@
+.herbology-game {
+    position: relative;
+    max-width: 600px;
+    margin: 2rem auto;
+    background: url('https://www.transparenttextures.com/patterns/aged-paper.png'), #2c3e50;
+    border: 5px solid #8e44ad;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+.herbology-hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    background: rgba(0,0,0,0.6);
+    padding: 1rem;
+    border-radius: 10px;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+}
+
+.stamina-bar {
+    width: 150px;
+    height: 15px;
+    background: #555;
+    border: 2px solid #222;
+    border-radius: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 0.5rem;
+}
+
+.stamina-fill {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #2ecc71, #27ae60);
+    transition: width 0.1s linear, background-color 0.3s ease;
+}
+
+.pots-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    position: relative;
+}
+
+.pot {
+    width: 100%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle at 50% 100%, #d35400, #a04000);
+    border-radius: 10px 10px 40px 40px;
+    position: relative;
+    border-top: 15px solid #873600;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+}
+
+.mandrake {
+    position: absolute;
+    bottom: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 4rem;
+    transition: bottom 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -webkit-user-select: none;
+    user-select: none;
+    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
+}
+
+.pot.active .mandrake {
+    bottom: 10px;
+    animation: screamShake 0.1s infinite;
+}
+
+@keyframes screamShake {
+    0% { transform: translateX(-50%) rotate(-5deg) scale(1.1); }
+    50% { transform: translateX(-50%) rotate(5deg) scale(1.1); }
+    100% { transform: translateX(-50%) rotate(-5deg) scale(1.1); }
+}
+
+.herb-start-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}

@@ -1,0 +1,46 @@
+<div class="game-container gs-reveal">
+    <button class="btn-back magical-btn-small" onclick="navigateTo('view-games')">⟵ BACK TO MAP</button>
+    
+    <div class="game-header">
+        <h2 class="glow-text">Dueling Club</h2>
+        <p>Face off against the dueling dummy. Select your spells wisely!</p>
+    </div>
+    
+    <div class="dueling-arena">
+        <div class="duel-status-bar">
+            <div class="combatant-info player-info">
+                <div class="combatant-name" id="duel-player-name">You</div>
+                <div class="health-bar-bg">
+                    <div class="health-bar-fill player-hp" id="duel-player-hp"></div>
+                </div>
+            </div>
+            <div class="vs-text">VS</div>
+            <div class="combatant-info enemy-info">
+                <div class="combatant-name">Dueling Dummy</div>
+                <div class="health-bar-bg">
+                    <div class="health-bar-fill enemy-hp" id="duel-enemy-hp"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="combat-log" id="combat-log">
+            Welcome to the Dueling Club! The dummy is ready.
+        </div>
+        
+        <div class="combat-actions" id="combat-actions">
+            <button class="magical-btn action-offensive" onclick="DuelingGame.castSpell('offensive')">
+                <span class="spell-icon">💥</span> Offensive (Expelliarmus)
+            </button>
+            <button class="magical-btn action-defensive" onclick="DuelingGame.castSpell('defensive')">
+                <span class="spell-icon">🛡️</span> Defensive (Protego)
+            </button>
+            <button class="magical-btn action-healing" onclick="DuelingGame.castSpell('healing')">
+                <span class="spell-icon">✨</span> Healing (Vulnera Sanentur)
+            </button>
+        </div>
+        
+        <div class="combat-restart hidden" id="combat-restart">
+            <button class="magical-btn" onclick="DuelingGame.init()">Duel Again</button>
+        </div>
+    </div>
+</div>

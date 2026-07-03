@@ -1,0 +1,25 @@
+<div class="game-container gs-reveal">
+    <button class="btn-back magical-btn-small" onclick="navigateTo('view-games')">⟵ BACK TO MAP</button>
+    
+    <div class="game-header">
+        <h2 class="glow-text">The North Tower</h2>
+        <p>Gaze into the Crystal Ball to reveal your fortune...</p>
+    </div>
+    
+    <div class="divination-room">
+        <div class="crystal-ball-stand">
+            <div id="crystal-ball" class="crystal-ball" onclick="DivinationGame.gaze()">
+                <div class="smoke"></div>
+                <div class="smoke smoke-2"></div>
+            </div>
+            <div class="stand-base"></div>
+        </div>
+        
+        <div id="fortune-display" class="fortune-display hidden">
+            <h3 class="glow-text">Your Fortune</h3>
+            <p id="fortune-text">The mists are clearing...</p>
+            <div id="fortune-reward" class="fortune-reward"></div>
+            <button class="magical-btn-small" onclick="DivinationGame.reset()" style="margin-top: 1rem;">Gaze Again</button>
+        </div>
+    </div>
+</div>

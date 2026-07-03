@@ -18,11 +18,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function loadViews() {
     const views = [
-        'home', 'games', 'spell-casting', 
-        'potion-mixing', 'memory-cards', 
-        'house-quiz', 'flying-challenge',
-        'leaderboard', 'about', 'settings',
-        'sorting-ceremony', 'profile', 'diagon-alley', 'library'
+        'home', 'about', 'settings', 'leaderboard', 'games', 
+        'spell-casting', 'potion-mixing', 'memory-cards', 'house-quiz', 'flying-challenge',
+        'sorting-ceremony', 'profile', 'diagon-alley', 'library',
+        'dueling', 'herbology', 'divination', 'creatures'
     ];
     
     for (const view of views) {
