@@ -1,1 +1,21 @@
-[]
+{
+    "spell-casting": [
+        { "name": "Merlin", "score": 150 },
+        { "name": "Dumbledore", "score": 120 }
+    ],
+    "potion-mixing": [
+        { "name": "Snape", "score": 5 },
+        { "name": "Hermione", "score": 4 }
+    ],
+    "memory-cards": [
+        { "name": "Luna", "score": 300 },
+        { "name": "Neville", "score": 250 }
+    ],
+    "flying-challenge": [
+        { "name": "Harry", "score": 200 },
+        { "name": "Draco", "score": 180 }
+    ],
+    "house-quiz": [
+        { "name": "Rowena", "score": 50 }
+    ]
+}

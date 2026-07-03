@@ -92,6 +92,10 @@ function potionExplosion() {
     document.getElementById('potion-play-screen').classList.add('hidden');
     document.getElementById('potion-end-screen').classList.remove('hidden');
     document.getElementById('potion-final-score').textContent = potionScore;
+    
+    if (potionScore > 0 && typeof showNamePrompt === 'function') {
+        showNamePrompt('potion-mixing', potionScore);
+    }
 }
 
 function getRandomColor() {

@@ -1,0 +1,28 @@
+<button class="magical-btn btn-back" onclick="navigateTo('view-home')">← Back</button>
+<h2 class="view-title">Hall of Fame</h2>
+<div class="leaderboard-container">
+    <div class="leaderboard-tabs">
+        <button class="tab-btn active" onclick="showLeaderboard('spell-casting')">Spell Casting</button>
+        <button class="tab-btn" onclick="showLeaderboard('potion-mixing')">Potion Mixing</button>
+        <button class="tab-btn" onclick="showLeaderboard('memory-cards')">Memory Cards</button>
+        <button class="tab-btn" onclick="showLeaderboard('house-quiz')">House Quiz</button>
+        <button class="tab-btn" onclick="showLeaderboard('flying-challenge')">Broom Flight</button>
+    </div>
+    
+    <div class="leaderboard-content">
+        <table class="leaderboard-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Wizard Name</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody id="leaderboard-body">
+                <!-- Scores injected dynamically -->
+            </tbody>
+        </table>
+        <div id="leaderboard-loading" class="hidden">Summoning records...</div>
+        <div id="leaderboard-error" class="hidden error">The records are sealed by dark magic.</div>
+    </div>
+</div>

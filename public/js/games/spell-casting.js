@@ -92,6 +92,10 @@ function endSpellCasting() {
     document.getElementById('spell-play-screen').classList.add('hidden');
     document.getElementById('spell-end-screen').classList.remove('hidden');
     document.getElementById('spell-final-score').textContent = spellScore;
+    
+    if (spellScore > 0 && typeof showNamePrompt === 'function') {
+        showNamePrompt('spell-casting', spellScore);
+    }
 }
 
 function endGame(menuViewId) {

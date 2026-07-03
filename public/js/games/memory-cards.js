@@ -110,4 +110,8 @@ function endMemoryGame(won) {
         title.textContent = "Time's Up!";
     }
     document.getElementById('memory-final-score').textContent = memoryScore;
+    
+    if (memoryScore > 0 && typeof showNamePrompt === 'function') {
+        showNamePrompt('memory-cards', memoryScore);
+    }
 }

@@ -1,0 +1,101 @@
+/* --- Leaderboard Styles --- */
+.leaderboard-container {
+    background: var(--card-bg);
+    border: 1px solid rgba(167, 139, 250, 0.3);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(167, 139, 250, 0.1);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.leaderboard-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(167, 139, 250, 0.3);
+    color: var(--text-muted);
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+    background: rgba(167, 139, 250, 0.1);
+    color: var(--text-light);
+    transform: translateY(-2px);
+}
+
+.tab-btn.active {
+    background: rgba(234, 179, 8, 0.15);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    box-shadow: 0 0 15px rgba(234, 179, 8, 0.2);
+}
+
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--text-light);
+    font-family: 'Inter', sans-serif;
+}
+
+.leaderboard-table th {
+    font-family: 'Cinzel', serif;
+    color: var(--accent-color);
+    text-align: left;
+    padding: 1rem;
+    border-bottom: 2px solid rgba(234, 179, 8, 0.3);
+    font-size: 1.2rem;
+}
+
+.leaderboard-table td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(167, 139, 250, 0.1);
+    font-size: 1.1rem;
+}
+
+.leaderboard-table tr:hover td {
+    background: rgba(167, 139, 250, 0.05);
+}
+
+.leaderboard-table tbody tr:first-child td {
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+.leaderboard-table tbody tr:first-child td:first-child::before {
+    content: "🥇 ";
+}
+.leaderboard-table tbody tr:nth-child(2) td:first-child::before {
+    content: "🥈 ";
+}
+.leaderboard-table tbody tr:nth-child(3) td:first-child::before {
+    content: "🥉 ";
+}
+
+#leaderboard-loading {
+    text-align: center;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 2rem;
+}
+
+#leaderboard-error.error {
+    text-align: center;
+    color: #ef4444;
+    padding: 2rem;
+}

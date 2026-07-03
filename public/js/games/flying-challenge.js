@@ -163,5 +163,11 @@ function endFlyingGame() {
     
     document.getElementById('fly-play-screen').classList.add('hidden');
     document.getElementById('fly-end-screen').classList.remove('hidden');
-    document.getElementById('fly-final-score').textContent = Math.floor(flyScore / 10);
+    
+    let finalScore = Math.floor(flyScore / 10);
+    document.getElementById('fly-final-score').textContent = finalScore;
+    
+    if (finalScore > 0 && typeof showNamePrompt === 'function') {
+        showNamePrompt('flying-challenge', finalScore);
+    }
 }

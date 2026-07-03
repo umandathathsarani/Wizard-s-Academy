@@ -122,4 +122,8 @@ function showQuizResult() {
     if (typeof selectHouse === 'function') {
         selectHouse(winner);
     }
+    
+    if (max > 0 && typeof showNamePrompt === 'function') {
+        showNamePrompt('house-quiz', max);
+    }
 }

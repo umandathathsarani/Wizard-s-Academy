@@ -20,7 +20,8 @@ async function loadViews() {
     const views = [
         'home', 'games', 'spell-casting', 
         'potion-mixing', 'memory-cards', 
-        'house-quiz', 'flying-challenge'
+        'house-quiz', 'flying-challenge',
+        'leaderboard'
     ];
     
     for (const view of views) {
@@ -206,4 +207,164 @@ function toggleAudio() {
         statusSpan.textContent = 'OFF';
         if (audioIcon) audioIcon.textContent = '🔇';
     }
+}
+
+// --- Leaderboard API & Modal Logic ---
+async function fetchLeaderboard(gameId) {
+    const tableBody = document.getElementById('leaderboard-body');
+    const loading = document.getElementById('leaderboard-loading');
+    const errorMsg = document.getElementById('leaderboard-error');
+    
+    if(!tableBody) return;
+    
+    tableBody.innerHTML = '';
+    loading.classList.remove('hidden');
+    errorMsg.classList.add('hidden');
+    
+    try {
+        const response = await fetch('/api/leaderboard');
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        const scores = data[gameId] || [];
+        
+        loading.classList.add('hidden');
+        
+        if (scores.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="3" style="text-align: center; color: var(--text-muted);">No wizards have completed this quest yet.</td></tr>';
+            return;
+        }
+        
+        scores.forEach((entry, index) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${entry.name}</td>
+                <td>${entry.score}</td>
+            `;
+            tableBody.appendChild(tr);
+        });
+    } catch(err) {
+        loading.classList.add('hidden');
+        errorMsg.classList.remove('hidden');
+        console.error("Failed to load leaderboard", err);
+    }
+}
+
+function showLeaderboard(gameId) {
+    if (event && event.target) {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+    fetchLeaderboard(gameId);
+}
+
+const originalNavigateTo = navigateTo;
+navigateTo = function(viewId) {
+    originalNavigateTo(viewId);
+    if(viewId === 'view-leaderboard') {
+        const firstTab = document.querySelector('.tab-btn');
+        if(firstTab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            firstTab.classList.add('active');
+            fetchLeaderboard('spell-casting');
+        }
+    }
+}
+
+function showNamePrompt(gameId, score, callback) {
+    let modal = document.getElementById('name-entry-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'name-entry-modal';
+        modal.className = 'modal-overlay';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <h3 class="panel-title" style="margin-bottom: 1rem; color: var(--accent-color);">A New Record!</h3>
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">The sorting hat requests your name for the hall of fame.</p>
+                <input type="text" id="wizard-name-input" class="magical-input" placeholder="Your Wizard Name..." maxlength="15" autocomplete="off" spellcheck="false" style="margin-bottom: 2rem; text-align: center;">
+                <button id="submit-name-btn" class="magical-btn">Seal Record</button>
+                <br>
+                <button id="skip-name-btn" class="magical-btn-small" style="margin-top: 1rem; opacity: 0.7;">Skip</button>
+            </div>
+        `;
+        document.body.appendChild(modal);
+        
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .modal-overlay {
+                position: fixed;
+                top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(5px);
+                z-index: 2000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s ease;
+            }
+            .modal-overlay.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .modal-content {
+                background: var(--card-bg);
+                border: 1px solid rgba(167, 139, 250, 0.5);
+                border-radius: 20px;
+                padding: 3rem;
+                text-align: center;
+                max-width: 400px;
+                width: 90%;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.8), inset 0 0 20px rgba(167, 139, 250, 0.2);
+                transform: scale(0.9);
+                transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            }
+            .modal-overlay.active .modal-content {
+                transform: scale(1);
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    modal.classList.add('active');
+    const input = document.getElementById('wizard-name-input');
+    input.value = '';
+    input.focus();
+    
+    const submitBtn = document.getElementById('submit-name-btn');
+    const skipBtn = document.getElementById('skip-name-btn');
+    
+    const newSubmitBtn = submitBtn.cloneNode(true);
+    submitBtn.parentNode.replaceChild(newSubmitBtn, submitBtn);
+    const newSkipBtn = skipBtn.cloneNode(true);
+    skipBtn.parentNode.replaceChild(newSkipBtn, skipBtn);
+    
+    newSubmitBtn.onclick = async () => {
+        const name = input.value.trim();
+        if(!name) return;
+        newSubmitBtn.textContent = 'Sealing...';
+        newSubmitBtn.disabled = true;
+        
+        try {
+            await fetch('/api/leaderboard', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ playerName: name, score: score, game: gameId })
+            });
+        } catch(e) {
+            console.error(e);
+        }
+        
+        modal.classList.remove('active');
+        newSubmitBtn.textContent = 'Seal Record';
+        newSubmitBtn.disabled = false;
+        
+        if (callback) callback();
+    };
+    
+    newSkipBtn.onclick = () => {
+        modal.classList.remove('active');
+        if (callback) callback();
+    };
 }
