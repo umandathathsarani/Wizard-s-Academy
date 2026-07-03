@@ -169,7 +169,12 @@
                     <h3>Potion Mixing</h3>
                     <p>Memorize and mix ingredients!</p>
                 </div>
-                <!-- Future games will go here -->
+                
+                <div class="game-card" onclick="navigateTo('view-memory-cards')">
+                    <div class="game-icon">🃏</div>
+                    <h3>Memory Cards</h3>
+                    <p>Find the matching magical pairs!</p>
+                </div>
             </div>
         </div>
 
@@ -241,6 +246,35 @@
                     <h2 id="potion-end-title">Explosion! 💥</h2>
                     <p>Final Score: <span id="potion-final-score">0</span></p>
                     <button class="magical-btn start-btn" onclick="startPotionMixing()">Brew Again</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Memory Cards Game View -->
+        <div id="view-memory-cards" class="view hidden">
+            <button class="magical-btn btn-back" onclick="endGame('view-games')">← Abandon Quest</button>
+            <div class="game-header">
+                <div class="score-display">Score: <span id="memory-score">0</span></div>
+                <div class="timer-display">Time: <span id="memory-timer">60</span>s</div>
+            </div>
+            
+            <div class="game-arena">
+                <div id="memory-start-screen">
+                    <h2>Magical Pairs</h2>
+                    <p style="margin: 1rem 0; color: var(--text-muted);">Find all the matching cards before time runs out!</p>
+                    <button class="magical-btn start-btn" onclick="startMemoryGame()">Deal Cards</button>
+                </div>
+                
+                <div id="memory-play-screen" class="hidden">
+                    <div id="memory-grid" class="memory-grid">
+                        <!-- Cards injected by JS -->
+                    </div>
+                </div>
+
+                <div id="memory-end-screen" class="hidden">
+                    <h2 id="memory-end-title">Time's Up!</h2>
+                    <p>Final Score: <span id="memory-final-score">0</span></p>
+                    <button class="magical-btn start-btn" onclick="startMemoryGame()">Play Again</button>
                 </div>
             </div>
         </div>
