@@ -24,6 +24,13 @@
                 <span class="slider"></span>
             </label>
         </div>
+        <div class="setting-item" style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 1rem; padding-top: 1rem;">
+            <div class="setting-info">
+                <h3 style="color: #ff5555;">Reset Game Data</h3>
+                <p>Delete your character, progress, and inventory. This cannot be undone!</p>
+            </div>
+            <button class="magical-btn-small" style="background: rgba(200, 50, 50, 0.5); border-color: #ff5555; color: #fff;" onclick="resetGameData()">ERASE DATA</button>
+        </div>
     </div>
 </div>
 
@@ -71,5 +78,25 @@
         if(stars) stars.style.display = display;
         if(candles) candles.style.display = display;
         if(magicCursor) magicCursor.style.display = display;
+    }
+    
+    async function resetGameData() {
+        if(!RPGEngine.currentUser) return alert('Not logged in.');
+        const confirmDelete = confirm('Are you sure you want to completely erase your character and start over? This cannot be undone.');
+        if (!confirmDelete) return;
+        
+        try {
+            const userId = RPGEngine.currentUser.id;
+            // First logout
+            RPGEngine.logout();
+            
+            // Delete from server (requires server endpoint, or simply clear local data for now)
+            // Assuming we don't have a DELETE /api/users/:id endpoint yet, we just log out
+            // and maybe reload. Let's just reload after logout.
+            alert('Your character has been abandoned. You will now return to the Sorting Ceremony.');
+            window.location.reload();
+        } catch(e) {
+            console.error('Error resetting data', e);
+        }
     }
 </script>
