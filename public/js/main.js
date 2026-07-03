@@ -102,3 +102,123 @@ function initStars(count) {
     }
 }
 
+// SPA Navigation
+function navigateTo(viewId) {
+    document.querySelectorAll('.view').forEach(view => {
+        view.classList.remove('active');
+        view.classList.add('hidden');
+    });
+    
+    const targetView = document.getElementById(viewId);
+    if (targetView) {
+        targetView.classList.remove('hidden');
+        targetView.classList.add('active');
+    }
+}
+
+// --- Spell Casting Game Logic ---
+const spells = [
+    "Wingardium Leviosa",
+    "Expelliarmus",
+    "Lumos",
+    "Alohomora",
+    "Expecto Patronum",
+    "Avada Kedavra",
+    "Crucio",
+    "Imperio",
+    "Protego",
+    "Accio",
+    "Stupefy",
+    "Riddikulus"
+];
+
+let currentSpell = "";
+let score = 0;
+let timeLeft = 30;
+let gameInterval = null;
+
+function startSpellCasting() {
+    // Reset state
+    score = 0;
+    timeLeft = 30;
+    document.getElementById('spell-score').textContent = score;
+    document.getElementById('spell-timer').textContent = timeLeft;
+    
+    // UI swaps
+    document.getElementById('spell-start-screen').classList.add('hidden');
+    document.getElementById('spell-end-screen').classList.add('hidden');
+    document.getElementById('spell-play-screen').classList.remove('hidden');
+    
+    // Clear feedback and input
+    document.getElementById('spell-feedback').textContent = '';
+    const input = document.getElementById('spell-input');
+    input.value = '';
+    input.focus();
+
+    // Start timer
+    if (gameInterval) clearInterval(gameInterval);
+    gameInterval = setInterval(updateTimer, 1000);
+
+    // Load first spell
+    nextSpell();
+}
+
+function updateTimer() {
+    timeLeft--;
+    document.getElementById('spell-timer').textContent = timeLeft;
+    
+    if (timeLeft <= 0) {
+        endSpellCasting();
+    }
+}
+
+function nextSpell() {
+    const randomIndex = Math.floor(Math.random() * spells.length);
+    currentSpell = spells[randomIndex];
+    document.getElementById('spell-target').textContent = currentSpell;
+    
+    const input = document.getElementById('spell-input');
+    input.value = '';
+}
+
+// Input event listener to check spell
+document.getElementById('spell-input')?.addEventListener('input', (e) => {
+    const typed = e.target.value;
+    const feedback = document.getElementById('spell-feedback');
+    
+    if (typed === currentSpell) {
+        // Success
+        score += 10;
+        document.getElementById('spell-score').textContent = score;
+        feedback.textContent = '✨ Excellent!';
+        feedback.classList.remove('error');
+        
+        // Show next spell after a tiny delay for satisfaction
+        setTimeout(() => {
+            feedback.textContent = '';
+            nextSpell();
+        }, 300);
+    } else if (!currentSpell.startsWith(typed)) {
+        // Typo
+        feedback.textContent = '❌ Incorrect incantation!';
+        feedback.classList.add('error');
+    } else {
+        // Correct so far
+        feedback.textContent = '';
+        feedback.classList.remove('error');
+    }
+});
+
+function endSpellCasting() {
+    clearInterval(gameInterval);
+    document.getElementById('spell-play-screen').classList.add('hidden');
+    document.getElementById('spell-end-screen').classList.remove('hidden');
+    document.getElementById('spell-final-score').textContent = score;
+    
+    // Save to leaderboard logic will go here in Phase 8
+}
+
+function endGame(menuViewId) {
+    if (gameInterval) clearInterval(gameInterval);
+    navigateTo(menuViewId);
+}

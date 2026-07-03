@@ -16,19 +16,64 @@
     <div id="candles-container"></div>
     
     <div class="app-container">
-        <header class="hero">
-            <h1 class="glow-text">Wizard's Academy</h1>
-            <p class="subtitle">Magic begins with curiosity.</p>
-        </header>
-        
-        <main id="main-content">
-            <div class="menu-buttons">
-                <button class="magical-btn" onclick="location.href='#games'">Play Games</button>
-                <button class="magical-btn" onclick="location.href='#leaderboard'">Leaderboard</button>
-                <button class="magical-btn" onclick="location.href='#about'">About</button>
-                <button class="magical-btn" onclick="location.href='#settings'">Settings</button>
+        <!-- Home View -->
+        <div id="view-home" class="view active">
+            <header class="hero">
+                <h1 class="glow-text">Wizard's Academy</h1>
+                <p class="subtitle">Magic begins with curiosity.</p>
+            </header>
+            <main>
+                <div class="menu-buttons">
+                    <button class="magical-btn" onclick="navigateTo('view-games')">Play Games</button>
+                    <button class="magical-btn" onclick="navigateTo('view-leaderboard')">Leaderboard</button>
+                    <button class="magical-btn" onclick="navigateTo('view-about')">About</button>
+                    <button class="magical-btn" onclick="navigateTo('view-settings')">Settings</button>
+                </div>
+            </main>
+        </div>
+
+        <!-- Games Selection View -->
+        <div id="view-games" class="view hidden">
+            <button class="magical-btn btn-back" onclick="navigateTo('view-home')">← Back</button>
+            <h2 class="view-title">Magical Mini-Games</h2>
+            <div class="games-grid">
+                <div class="game-card" onclick="navigateTo('view-spell-casting')">
+                    <div class="game-icon">⚡</div>
+                    <h3>Spell Casting</h3>
+                    <p>Type spells before time runs out!</p>
+                </div>
+                <!-- Future games will go here -->
             </div>
-        </main>
+        </div>
+
+        <!-- Spell Casting Game View -->
+        <div id="view-spell-casting" class="view hidden">
+            <button class="magical-btn btn-back" onclick="endGame('view-games')">← Abandon Quest</button>
+            <div class="game-header">
+                <div class="score-display">Score: <span id="spell-score">0</span></div>
+                <div class="timer-display">Time: <span id="spell-timer">30</span>s</div>
+            </div>
+            
+            <div class="game-arena">
+                <div id="spell-start-screen">
+                    <h2>Ready your wand...</h2>
+                    <button class="magical-btn start-btn" onclick="startSpellCasting()">Start Casting</button>
+                </div>
+                
+                <div id="spell-play-screen" class="hidden">
+                    <div class="spell-target" id="spell-target">Wingardium Leviosa</div>
+                    <input type="text" id="spell-input" class="magical-input" autocomplete="off" spellcheck="false" placeholder="Type the spell here...">
+                    <div id="spell-feedback" class="feedback"></div>
+                </div>
+
+                <div id="spell-end-screen" class="hidden">
+                    <h2>Time's Up!</h2>
+                    <p>Final Score: <span id="spell-final-score">0</span></p>
+                    <button class="magical-btn start-btn" onclick="startSpellCasting()">Play Again</button>
+                </div>
+            </div>
+        </div>
+        
     </div>
 
     <script src="js/main.js"></script>
