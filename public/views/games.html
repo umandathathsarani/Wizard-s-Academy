@@ -1,29 +1,43 @@
-<button class="magical-btn btn-back" onclick="navigateTo('view-home')">← Back</button>
-<h2 class="view-title">Magical Mini-Games</h2>
-<div class="games-grid">
-    <div class="game-card" onclick="navigateTo('view-spell-casting')">
-        <div class="game-icon">⚡</div>
-        <h3>Spell Casting</h3>
-        <p>Type spells before time runs out!</p>
+<div class="map-container gs-reveal">
+    <button class="btn-back magical-btn-small" onclick="navigateTo('view-home')" style="position: absolute; top: 20px; left: 20px; z-index: 10;">⟵ BACK</button>
+    <div class="map-title">
+        <h2 class="glow-text">THE ACADEMY GROUNDS</h2>
+        <p>Select your destination</p>
     </div>
-    <div class="game-card" onclick="navigateTo('view-potion-mixing')">
-        <div class="game-icon">🧪</div>
-        <h3>Potion Mixing</h3>
-        <p>Memorize and mix ingredients!</p>
-    </div>
-    <div class="game-card" onclick="navigateTo('view-memory-cards')">
-        <div class="game-icon">🃏</div>
-        <h3>Memory Cards</h3>
-        <p>Find the matching magical pairs!</p>
-    </div>
-    <div class="game-card" onclick="navigateTo('view-house-quiz')">
-        <div class="game-icon">🎩</div>
-        <h3>Sorting Quiz</h3>
-        <p>Discover your true magical house!</p>
-    </div>
-    <div class="game-card" onclick="navigateTo('view-flying-challenge')">
-        <div class="game-icon">🧹</div>
-        <h3>Flying Challenge</h3>
-        <p>Dodge the magical obstacles!</p>
+    
+    <div class="interactive-map">
+        <img src="images/castle_map_bg.png" alt="Castle Map" class="map-background">
+        
+        <!-- Points of Interest -->
+        <div class="poi-marker" style="top: 40%; left: 35%;" onclick="navigateTo('view-spell-casting')">
+            <div class="marker-dot"></div>
+            <div class="marker-label">Charms Classroom<br><span>Spell Casting</span></div>
+        </div>
+        
+        <div class="poi-marker" style="top: 65%; left: 45%;" onclick="navigateTo('view-potion-mixing')">
+            <div class="marker-dot"></div>
+            <div class="marker-label">The Dungeons<br><span>Potion Mixing</span></div>
+        </div>
+        
+        <div class="poi-marker" style="top: 30%; left: 65%;" onclick="navigateTo('view-flying-challenge')">
+            <div class="marker-dot"></div>
+            <div class="marker-label">Quidditch Pitch<br><span>Flying Challenge</span></div>
+        </div>
+        
+        <div class="poi-marker" style="top: 50%; left: 75%;" onclick="navigateTo('view-memory-cards')">
+            <div class="marker-dot"></div>
+            <div class="marker-label">The Owlery<br><span>Memory Cards</span></div>
+        </div>
+        
+        <div class="poi-marker" style="top: 20%; left: 50%;" onclick="navigateTo('view-house-quiz')">
+            <div class="marker-dot"></div>
+            <div class="marker-label">The Great Hall<br><span>House Quiz</span></div>
+        </div>
+        
+        <!-- Locked location teaser -->
+        <div class="poi-marker locked" style="top: 80%; left: 20%;">
+            <div class="marker-dot"></div>
+            <div class="marker-label">Diagon Alley<br><span>(Locked - Phase 13)</span></div>
+        </div>
     </div>
 </div>

@@ -1,0 +1,131 @@
+/* public/css/map.css */
+.map-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding-top: 2rem;
+}
+
+.map-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    z-index: 5;
+    background: rgba(10, 10, 20, 0.7);
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.map-title h2 {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+.interactive-map {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    height: 70vh;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(212, 175, 55, 0.3);
+    border: 2px solid var(--accent-color);
+}
+
+.map-background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7) contrast(1.2);
+    transition: filter 0.5s;
+}
+
+.interactive-map:hover .map-background {
+    filter: brightness(0.6) contrast(1.3);
+}
+
+.poi-marker {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.marker-dot {
+    width: 20px;
+    height: 20px;
+    background: var(--accent-light);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--accent-color), 0 0 30px var(--accent-light);
+    border: 2px solid #fff;
+    animation: pulse-marker 2s infinite alternate;
+}
+
+.marker-label {
+    margin-top: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    border: 1px solid var(--accent-color);
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    text-align: center;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.marker-label span {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--accent-light);
+}
+
+.poi-marker:hover {
+    transform: translate(-50%, -50%) scale(1.2);
+    z-index: 20;
+}
+
+.poi-marker:hover .marker-label {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.poi-marker:hover .marker-dot {
+    animation: none;
+    box-shadow: 0 0 30px var(--accent-color), 0 0 50px #fff;
+}
+
+.poi-marker.locked .marker-dot {
+    background: #555;
+    box-shadow: 0 0 10px #000;
+    border-color: #333;
+    animation: none;
+}
+
+.poi-marker.locked .marker-label span {
+    color: #f87171;
+}
+
+@keyframes pulse-marker {
+    0% { transform: scale(1); box-shadow: 0 0 15px var(--accent-color); }
+    100% { transform: scale(1.3); box-shadow: 0 0 25px var(--accent-light), 0 0 40px #fff; }
+}
+
+@media (max-width: 768px) {
+    .map-title h2 { font-size: 1.8rem; }
+    .marker-label { font-size: 1rem; opacity: 1; transform: translateY(0); background: rgba(0,0,0,0.6); }
+    .interactive-map { height: 60vh; }
+}

@@ -218,9 +218,9 @@ function updateProfileView() {
 
 // Ensure updateProfileView is called when we navigate to profile
 // We'll hook into core.js navigateTo if possible, or just override it safely
-const originalNavigateTo = window.navigateTo;
+const rpgOriginalNavigateTo = window.navigateTo;
 window.navigateTo = function(viewId) {
-    if (originalNavigateTo) originalNavigateTo(viewId);
+    if (rpgOriginalNavigateTo) rpgOriginalNavigateTo(viewId);
     if (viewId === 'view-profile') {
         setTimeout(updateProfileView, 50); // slight delay to ensure HTML is injected
     }
