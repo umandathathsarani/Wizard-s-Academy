@@ -1,0 +1,102 @@
+/* public/css/sorting.css */
+.sorting-container {
+    background: rgba(10, 15, 25, 0.9);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 20px;
+    padding: 3rem 4rem;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(212, 175, 55, 0.1);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.sorting-header {
+    margin-bottom: 3rem;
+}
+
+.sorting-header h2 {
+    font-size: 3rem;
+    color: var(--accent-color);
+}
+
+.sorting-step {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.sorting-step label {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.sorting-step .magical-input {
+    width: 80%;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.sorting-hat-dialogue {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--text-light);
+    margin-bottom: 3rem;
+    min-height: 100px;
+}
+
+.sorting-choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.choice-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-color);
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    padding: 1.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.choice-btn:hover {
+    background: rgba(212, 175, 55, 0.2);
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+}
+
+.massive-text {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 30px currentColor;
+}
+
+.house-gryffindor { color: #dc2626; }
+.house-ravenclaw { color: #2563eb; }
+.house-slytherin { color: #16a34a; }
+.house-hufflepuff { color: #eab308; }
+
+@media (max-width: 768px) {
+    .sorting-choices {
+        grid-template-columns: 1fr;
+    }
+    .massive-text {
+        font-size: 3rem;
+    }
+    .sorting-step .magical-input {
+        width: 100%;
+        font-size: 1.5rem;
+    }
+    .sorting-container {
+        padding: 2rem 1.5rem;
+    }
+}

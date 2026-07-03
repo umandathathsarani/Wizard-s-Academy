@@ -1,0 +1,32 @@
+<div class="sorting-container gs-reveal">
+    <button class="btn-back magical-btn-small" onclick="navigateTo('view-home')">⟵ BACK</button>
+    <div class="sorting-header">
+        <h2 class="glow-text">THE SORTING CEREMONY</h2>
+        <p>Step forward, young wizard. Put on the hat.</p>
+    </div>
+    
+    <div id="sorting-step-1" class="sorting-step">
+        <label for="wizard-name">What is your name?</label>
+        <input type="text" id="wizard-name" class="magical-input" placeholder="e.g. Harry Potter" autocomplete="off">
+        <button class="magical-btn" onclick="startSorting()">WEAR THE HAT</button>
+    </div>
+    
+    <div id="sorting-step-2" class="sorting-step" style="display:none;">
+        <div class="sorting-hat-dialogue">
+            <p id="hat-text">"Hmm... difficult. Very difficult. Plenty of courage, I see. Not a bad mind either. There's talent, oh my goodness, yes..."</p>
+        </div>
+        <div class="sorting-choices">
+            <button class="choice-btn" onclick="selectTrait('bravery')">I value Bravery</button>
+            <button class="choice-btn" onclick="selectTrait('wisdom')">I value Wisdom</button>
+            <button class="choice-btn" onclick="selectTrait('ambition')">I value Ambition</button>
+            <button class="choice-btn" onclick="selectTrait('loyalty')">I value Loyalty</button>
+        </div>
+    </div>
+    
+    <div id="sorting-step-3" class="sorting-step" style="display:none;">
+        <h2 id="assigned-house" class="glow-text massive-text">GRYFFINDOR!</h2>
+        <p>Welcome to your new home.</p>
+        <br>
+        <button class="magical-btn" onclick="finishSorting()">ENTER THE ACADEMY</button>
+    </div>
+</div>

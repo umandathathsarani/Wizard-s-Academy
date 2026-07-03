@@ -1,0 +1,36 @@
+<div class="profile-container gs-reveal">
+    <button class="btn-back magical-btn-small" onclick="navigateTo('view-home')">⟵ BACK</button>
+    <div class="profile-header">
+        <div class="profile-avatar" id="profile-avatar">🧙‍♂️</div>
+        <div class="profile-info">
+            <h2 id="profile-name" class="glow-text">Wizard Name</h2>
+            <p id="profile-house" class="profile-house">HOUSE</p>
+            <div class="level-badge">Level <span id="profile-level">1</span></div>
+        </div>
+    </div>
+    
+    <div class="profile-stats">
+        <div class="stat-card">
+            <h3>EXPERIENCE</h3>
+            <div class="xp-bar-container">
+                <div class="xp-bar" id="profile-xp-bar" style="width: 0%"></div>
+            </div>
+            <p id="profile-xp-text">0 / 100 XP</p>
+        </div>
+        <div class="stat-card">
+            <h3>WEALTH</h3>
+            <p class="galleons"><span class="coin-icon">🪙</span> <span id="profile-coins">0</span> Galleons</p>
+        </div>
+    </div>
+    
+    <div class="profile-tabs">
+        <button class="tab-btn active">Overview</button>
+        <button class="tab-btn" style="opacity:0.5; cursor:not-allowed;" title="Coming in Phase 13">Inventory</button>
+        <button class="tab-btn" style="opacity:0.5; cursor:not-allowed;" title="Coming in Phase 14">Quests</button>
+    </div>
+    
+    <div class="profile-content">
+        <p class="placeholder-text">Play mini-games to earn XP and Galleons!</p>
+        <button class="magical-btn" onclick="navigateTo('view-games')">PLAY GAMES</button>
+    </div>
+</div>

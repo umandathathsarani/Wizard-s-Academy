@@ -1,1 +1,10 @@
-[]
+[
+    {
+        "id": "1783062852937257",
+        "username": "TestWizard",
+        "house": "ravenclaw",
+        "level": 1,
+        "xp": 50,
+        "coins": 120
+    }
+]

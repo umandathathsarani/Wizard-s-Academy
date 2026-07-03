@@ -21,7 +21,8 @@ async function loadViews() {
         'home', 'games', 'spell-casting', 
         'potion-mixing', 'memory-cards', 
         'house-quiz', 'flying-challenge',
-        'leaderboard', 'about', 'settings'
+        'leaderboard', 'about', 'settings',
+        'sorting-ceremony', 'profile'
     ];
     
     for (const view of views) {
@@ -329,7 +330,13 @@ function showNamePrompt(gameId, score, callback) {
     
     modal.classList.add('active');
     const input = document.getElementById('wizard-name-input');
-    input.value = '';
+    
+    // Auto-fill name if logged in
+    if (typeof RPGEngine !== 'undefined' && RPGEngine.currentUser) {
+        input.value = RPGEngine.currentUser.username;
+    } else {
+        input.value = '';
+    }
     input.focus();
     
     const submitBtn = document.getElementById('submit-name-btn');
@@ -352,6 +359,12 @@ function showNamePrompt(gameId, score, callback) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ playerName: name, score: score, game: gameId })
             });
+            
+            // Award XP and Coins if logged in
+            if (typeof RPGEngine !== 'undefined' && RPGEngine.currentUser) {
+                await RPGEngine.addXP(50);
+                await RPGEngine.addCoins(20);
+            }
         } catch(e) {
             console.error(e);
         }

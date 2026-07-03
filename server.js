@@ -63,6 +63,80 @@ app.post('/api/leaderboard', (req, res) => {
         });
     });
 });
+
+const usersPath = path.join(__dirname, 'data', 'users.json');
+
+// Helper to read users
+function readUsers(callback) {
+    fs.readFile(usersPath, 'utf8', (err, data) => {
+        if (err) return callback([]);
+        try {
+            callback(JSON.parse(data));
+        } catch(e) {
+            callback([]);
+        }
+    });
+}
+
+// Helper to write users
+function writeUsers(users, callback) {
+    fs.writeFile(usersPath, JSON.stringify(users, null, 4), callback);
+}
+
+// Register new user
+app.post('/api/users/register', (req, res) => {
+    const { username, house } = req.body;
+    if (!username || !house) return res.status(400).json({ error: 'Missing username or house' });
+    
+    readUsers((users) => {
+        const newUser = {
+            id: Date.now().toString() + Math.floor(Math.random()*1000).toString(),
+            username,
+            house,
+            level: 1,
+            xp: 0,
+            coins: 100 // Starting bonus
+        };
+        users.push(newUser);
+        writeUsers(users, (err) => {
+            if (err) return res.status(500).json({ error: 'Failed to save user' });
+            res.json({ success: true, user: newUser });
+        });
+    });
+});
+
+// Get user
+app.get('/api/users/:id', (req, res) => {
+    readUsers((users) => {
+        const user = users.find(u => u.id === req.params.id);
+        if (user) {
+            res.json({ success: true, user });
+        } else {
+            res.status(404).json({ error: 'User not found' });
+        }
+    });
+});
+
+// Update user (XP, Coins, Level)
+app.put('/api/users/:id', (req, res) => {
+    const { xp, coins, level } = req.body;
+    
+    readUsers((users) => {
+        const userIndex = users.findIndex(u => u.id === req.params.id);
+        if (userIndex !== -1) {
+            if (xp !== undefined) users[userIndex].xp = xp;
+            if (coins !== undefined) users[userIndex].coins = coins;
+            if (level !== undefined) users[userIndex].level = level;
+            
+            writeUsers(users, (err) => {
+                if (err) return res.status(500).json({ error: 'Failed to update user' });
+                res.json({ success: true, user: users[userIndex] });
+            });
+        } else {
+            res.status(404).json({ error: 'User not found' });
+        }
+    });
+});
 // Serve index.html for the root route
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
