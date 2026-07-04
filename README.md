@@ -2,6 +2,8 @@
   <img src="public/favicon.png" alt="Logo" width="100" />
   <h1>✨ Wizard's Academy ✨</h1>
   
+  <h3><a href="https://play-wizards-academy.up.railway.app/">🎮 Play the Game Live Here! 🎮</a></h3>
+  
   <p>
     <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5" />
     <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3" />
